@@ -1,6 +1,8 @@
-## Goal Setting App
+## Affirmation
 
-> Follows the Traversy Media MERN tutorial. This is a quick reference repo for all the most modern MERN development, Docker and CI/CD practices
+Affirmation is an application that let's you create daily affirmations of positivity and inspiration to put you in a positive headspace. Simply create an affirmation when you wake up and manifest it into your daily life. When you head in for the evening, log your current mood and leave a note on how you feel as well as anything else on your mind. Through date & time indexing and the mood-meter, get a glimpse back in time to see how your mood and affirmations played a role in your everyday happiness. Having a bad day? Not to worry, we will generate an affirmation for you if your mood is neutral or worse so that you can get into a positive headspace and get the help you need to get on track.
+
+I believe doing this technique every day will help you gain self confidence, improve how you tackle and improve your mental health and foster the ability to think and learn from your past to improve your future
 
 #### Run the App
 
