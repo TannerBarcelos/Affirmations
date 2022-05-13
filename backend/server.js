@@ -15,6 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use(`${baseURL}/affirmations`, require('./routes/affirmationRoutes'));
+app.use(`${baseURL}/users`, require('./routes/userRoutes'));
 
 // Handle errors
 app.use(errorHandler);
