@@ -1,0 +1,50 @@
+version: '3'
+services:
+  # reverse proxy to route requests from client to server
+  nginx:
+    container_name: 'nginx'
+    depends_on:
+      - backend
+      - frontend
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    env_file:
+      - .env
+    ports:
+      # host:container
+      - '80:80'
+  backend:
+    container_name: 'backend'
+    build:
+      dockerfile: Dockerfile.dev
+      context: './backend'
+    volumes:
+      - /app/node_modules
+      - ./backend:/app
+    ports:
+      # host:container
+      - '4000:4000'
+    env_file:
+      - .env
+  frontend:
+    container_name: 'frontend'
+    stdin_open: true
+    restart: 'no'
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./frontend
+    ports:
+      # host:container
+      - '3000:3000'
+    volumes:
+      - /app/node_modules
+      - ./frontend:/app
+    env_file:
+      - .env
+    depends_on:
+      - backend
