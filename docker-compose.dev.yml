@@ -1,6 +1,5 @@
 version: '3'
 services:
-  # reverse proxy to route requests from client to server
   nginx:
     container_name: 'nginx'
     depends_on:
@@ -13,7 +12,6 @@ services:
     env_file:
       - .env
     ports:
-      # host:container
       - '80:80'
   backend:
     container_name: 'backend'
@@ -24,7 +22,6 @@ services:
       - /app/node_modules
       - ./backend:/app
     ports:
-      # host:container
       - '4000:4000'
     env_file:
       - .env
@@ -39,8 +36,7 @@ services:
       dockerfile: Dockerfile.dev
       context: ./frontend
     ports:
-      # host:container
-      - '3000:3000'
+      - '3000:80'
     volumes:
       - /app/node_modules
       - ./frontend:/app

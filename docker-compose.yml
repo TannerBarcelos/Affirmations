@@ -1,6 +1,7 @@
-version: '3.8'
+version: '3'
 services:
   nginx:
+    container_name: 'nginx'
     depends_on:
       - backend
       - frontend
@@ -8,26 +9,39 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./nginx
+    env_file:
+      - .env
     ports:
       - '80:80'
   backend:
+    container_name: 'backend'
     build:
       dockerfile: Dockerfile
       context: './backend'
     volumes:
       - /app/node_modules
       - ./backend:/app
+    ports:
+      # host:container
+      - '4000:4000'
     env_file:
-      - ../.env
+      - .env
   frontend:
+    container_name: 'frontend'
     stdin_open: true
+    restart: 'no'
     environment:
+      - NODE_ENV=development
       - CHOKIDAR_USEPOLLING=true
     build:
       dockerfile: Dockerfile
       context: ./frontend
+    ports:
+      - '3000:3000'
     volumes:
       - /app/node_modules
       - ./frontend:/app
     env_file:
-      - ../.env
+      - .env
+    depends_on:
+      - backend
