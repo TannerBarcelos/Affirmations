@@ -19,7 +19,14 @@ const getAllAffirmations = asyncHandler(async (request, response) => {
  */
 const getSingleAffirmation = asyncHandler(async (request, response) => {
   const { id } = request.params;
-  response.status(200).json({ message: `Get single affirmation by ID: ${id}` });
+  const affirmation = await affirmationModel.findById(id);
+
+  if (!affirmation) {
+    response.status(400);
+    throw new Error('This affirmation does not exist');
+  }
+
+  response.status(200).json(affirmation);
 });
 
 /**
