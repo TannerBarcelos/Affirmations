@@ -1,4 +1,4 @@
-build-dev-image:
+build-image:
 	docker build -t node-api -f ./Docker/Dockerfile.dev .
-run-dev-image:
-	docker run --name node-app -p 4000:4000 --env-file .env node-api
+run-image:
+	docker run --name node-app -p 4000:4000 -v /app/node_modules -v $(shell pwd):/app --env-file .env node-api

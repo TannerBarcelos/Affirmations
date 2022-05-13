@@ -10,16 +10,16 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target `all'.  Stop.
 
 
-# Make data base, printed on Wed May 11 21:05:38 2022
+# Make data base, printed on Thu May 12 17:36:25 2022
 
 # Variables
 
- 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
 ?F = $(notdir $?)
 # environment
+ 
 ELECTRON_NO_ATTACH_CONSOLE = 1
 # environment
 VSCODE_LOG_NATIVE = false
@@ -30,7 +30,7 @@ VSCODE_LOG_NATIVE = false
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /Users/tanner/Documents/development/projects/tutorials/mern-goals
+CURDIR := /Users/tanner/Documents/development/projects/affirmations
 # makefile
 SHELL = /bin/sh
 # environment
@@ -46,9 +46,9 @@ __CFBundleIdentifier = com.microsoft.VSCode
 # environment
 INFOPATH = /opt/homebrew/share/info:
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/vt/j0jqqkqx7v513pf7_vkml3sm0000gn/T/vscode-ipc-fdae1752-062b-426f-80b9-96a99269fd57.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/vt/j0jqqkqx7v513pf7_vkml3sm0000gn/T/vscode-ipc-56766af8-12bb-4cfa-bdfe-1b2a4267e85b.sock
 # environment
-VSCODE_CWD = /Users/tanner/Documents/development/projects/tutorials/mern-goals
+VSCODE_CWD = /Users/tanner/Documents/development/projects/affirmations
 # environment
 PATH = /Users/tanner/opt/anaconda3/bin:/Users/tanner/opt/anaconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin
 # environment
@@ -60,7 +60,7 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.aMTJjfDMsd/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.OH0XXNoCyq/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -68,7 +68,7 @@ CONDA_EXE = /Users/tanner/opt/anaconda3/bin/conda
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
-PWD = /Users/tanner/Documents/development/projects/tutorials/mern-goals
+PWD = /Users/tanner/documents/development/projects/affirmations
 # environment
 HOMEBREW_CELLAR = /opt/homebrew/Cellar
 # environment
@@ -84,14 +84,13 @@ MAKEFILEPATH = $(shell /usr/bin/xcode-select -print-path 2>/dev/null || echo /De
 # environment
 VSCODE_CLI = 1
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/tanner/Library/Application Support/Code/CachedData/57fd6d0195bb9b9d1b49f6da5db789060795de47
+VSCODE_CODE_CACHE_PATH = /Users/tanner/Library/Application Support/Code/CachedData/da15b6fd3ef856477bf6f4fb29ba1b7af717770d
 # environment
 LOGNAME = tanner
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
 CONDA_PROMPT_MODIFIER = (base) 
- 
 # environment
 ZSH = /Users/tanner/.oh-my-zsh
 # environment
@@ -115,17 +114,18 @@ MAKE_VERSION := 3.81
 # environment
 USER = tanner
 # makefile
-.DEFAULT_GOAL := run-dev
+.DEFAULT_GOAL := build-dev-image
 # default
 MAKECMDGOALS := all
 # environment
-TERM_SESSION_ID = w0t0p0:8280A865-8EA6-4D9F-B4A5-62AB8D1E7FD3
+TERM_SESSION_ID = w0t0p0:1E382FCB-54DF-4C58-B0C0-3AB4605D00E6
 # environment
 LESS = -R
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
 CONDA_SHLVL = 1
+ 
 # default
 MAKE_COMMAND := /Library/Developer/CommandLineTools/usr/bin/make
 # environment
@@ -137,7 +137,7 @@ TMPDIR = /var/folders/vt/j0jqqkqx7v513pf7_vkml3sm0000gn/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/tanner/Library/Application Support/Code/1.67.0-main.sock
+VSCODE_IPC_HOOK = /Users/tanner/Library/Application Support/Code/1.67.1-main.sock
 # makefile
 MAKEFLAGS = Rrqp
 # environment
@@ -147,7 +147,7 @@ MFLAGS = -Rrqp
 # environment
 TERM_PROGRAM_VERSION = 3.4.15
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.15933187.15933193.C955A1DC-6A9E-4D1A-9B9F-87A2FD65A476
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.16050492.16050498.A4C27996-4647-433D-8656-95C81E78F676
 # environment
 LC_TERMINAL_VERSION = 3.4.15
 # environment
@@ -157,7 +157,7 @@ HOMEBREW_PREFIX = /opt/homebrew
 # automatic
 +F = $(notdir $+)
 # environment
-ITERM_SESSION_ID = w0t0p0:8280A865-8EA6-4D9F-B4A5-62AB8D1E7FD3
+ITERM_SESSION_ID = w0t0p0:1E382FCB-54DF-4C58-B0C0-3AB4605D00E6
 # environment
 HOMEBREW_REPOSITORY = /opt/homebrew
 # environment
@@ -192,9 +192,8 @@ MAKELEVEL := 0
 CONDA_PREFIX = /Users/tanner/opt/anaconda3
 # environment
 TERM = xterm-256color
- 
 # environment
-VSCODE_PID = 1699
+VSCODE_PID = 1309
 # environment
 _CE_CONDA = 
 # environment
@@ -208,9 +207,9 @@ LANG = C
 
 # Directories
 
-# . (device 16777230, inode 16018987): 12 files, no impossibilities.
+# . (device 16777230, inode 16018987): 13 files, no impossibilities.
 
-# 12 files, no impossibilities in 1 directories.
+# 13 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -218,6 +217,7 @@ LANG = C
 
 # Files
 
+ 
 # Not a target:
 all:
 #  Command-line target.
@@ -236,11 +236,19 @@ all:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-11 21:05:38
+#  Last modified 2022-05-11 21:36:42
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+build-dev-image:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 2):
+	docker build -t node-api -f ./Docker/Dockerfile.dev .
+	
 
 # Not a target:
 .DEFAULT:
@@ -248,15 +256,16 @@ Makefile:
 #  Modification time never checked.
 #  File has not been updated.
 
-run-dev:
+run-dev-image:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 2):
+#  commands to execute (from `Makefile', line 4):
+	docker run --name node-app -p 4000:4000 --env-file .env node-api
 	
 
 # files hash-table stats:
-# Load=5/1024=0%, Rehash=0, Collisions=0/17=0%
+# Load=6/1024=1%, Rehash=0, Collisions=0/18=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -268,6 +277,6 @@ run-dev:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Wed May 11 21:05:38 2022
+# Finished Make data base on Thu May 12 17:36:25 2022
 
  

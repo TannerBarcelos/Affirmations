@@ -1,4 +1,6 @@
-make: Entering directory `/Users/tanner/Documents/development/projects/tutorials/mern-goals'
-make: `run-dev' is up to date.
-make: Leaving directory `/Users/tanner/Documents/development/projects/tutorials/mern-goals'
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/tanner/Documents/development/projects/affirmations'
+docker build -t node-api -f ./Docker/Dockerfile.dev .
+ 
+make: Leaving directory `/Users/tanner/Documents/development/projects/affirmations'
  
