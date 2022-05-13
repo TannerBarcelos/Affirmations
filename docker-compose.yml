@@ -22,7 +22,6 @@ services:
       - /app/node_modules
       - ./backend:/app
     ports:
-      # host:container
       - '4000:4000'
     env_file:
       - .env
@@ -36,8 +35,6 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./frontend
-    ports:
-      - '3000:3000'
     volumes:
       - /app/node_modules
       - ./frontend:/app
