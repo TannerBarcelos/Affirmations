@@ -7,7 +7,7 @@ const affirmationModel = require('../models/affirmationModel');
  * @param {*} response - express response object
  */
 const getAllAffirmations = asyncHandler(async (request, response) => {
-  const affirmations = await affirmationModel.find();
+  const affirmations = await affirmationModel.find({ user: request.user.id });
   response.status(200).json(affirmations);
 });
 
@@ -36,7 +36,9 @@ const createAffirmation = asyncHandler(async (request, response) => {
       'You must submit an affirmation and mood to log this entry',
     );
   }
+  const { id } = request.user;
   const affirm = await affirmationModel.create({
+    user: id, // save the user by their ID who created this entry
     mood,
     affirmation,
   });
@@ -50,18 +52,23 @@ const createAffirmation = asyncHandler(async (request, response) => {
  * @param {*} response - express response object
  */
 const updateAffirmation = asyncHandler(async (request, response) => {
-  const { id } = request.params;
-  const { mood, affirmation } = request.body;
+  const { id } = request.params; // pull out id of affirmation from params
+  const { mood, affirmation } = request.body; // get updated data from body
+  const user = request.user; // get user from user object in the request which is yielded by passing the protected middleware wrapping this route
 
   // Try to find this affirmation
   const affirm = await affirmationModel.findById(id);
 
-  // If not found, throw an error and return to client
+  // If the affirmation is not found, throw an error and return to client
   if (!affirm) {
     response.status(400);
     throw new Error('Affirmation not found');
   }
-
+  // Check that the logged in user matches the user of the affirmation we are updating - if it is not a match, user is not authorized
+  if (affirm.user.toString() !== user.id) {
+    response.status(401);
+    throw new Error('User not authorized');
+  }
   // If found, update the found affirmation with updated mood and affirmation data and re-create the object with a new object instance
   const updatedAffirmation = await affirmationModel.findByIdAndUpdate(
     id,
@@ -82,8 +89,9 @@ const updateAffirmation = asyncHandler(async (request, response) => {
  */
 const deleteAffirmation = asyncHandler(async (request, response) => {
   const { id } = request.params;
+  const user = request.user; // get user from user object in the request which is yielded by passing the protected middleware wrapping this route
 
-  // Try to find this affirmation
+  // Try to find the affirmation
   const affirm = await affirmationModel.findById(id);
 
   // If not found, throw an error and return to client
@@ -91,6 +99,13 @@ const deleteAffirmation = asyncHandler(async (request, response) => {
     response.status(400);
     throw new Error('Affirmation not found');
   }
+
+  // If found, Same as edit - Check that the logged in user matches the user of the affirmation we are updating - if it is not a match, user is not authorized
+  if (affirm.user.toString() !== user.id) {
+    response.status(401);
+    throw new Error('User not authorized');
+  }
+
   // Delete if found and return the deleted affirmations ID so we can use that client side to filter the UI
   await affirmationModel.remove(affirm);
   response.status(200).json(id);

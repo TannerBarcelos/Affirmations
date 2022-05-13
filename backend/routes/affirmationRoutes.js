@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const protect = require('../middlewares/authMiddleware');
+
 const {
   getAllAffirmations,
   getSingleAffirmation,
@@ -9,10 +11,10 @@ const {
   deleteAffirmation,
 } = require('../controllers/affirmationController');
 
-router.get('/', getAllAffirmations);
-router.get('/:id', getSingleAffirmation);
-router.post('/create', createAffirmation);
-router.put('/edit/:id', updateAffirmation);
-router.delete('/delete/:id', deleteAffirmation);
+router.get('/', protect, getAllAffirmations); // protected route via auth middleware and JWT
+router.get('/:id', protect, getSingleAffirmation);
+router.post('/create', protect, createAffirmation);
+router.put('/edit/:id', protect, updateAffirmation);
+router.delete('/delete/:id', protect, deleteAffirmation);
 
 module.exports = router;
