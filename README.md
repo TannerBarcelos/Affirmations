@@ -12,6 +12,7 @@ Affirmations mission is to help you gain self confidence, improve how you tackle
 PORT=4000
 MONGO_URI=<your_uri>
 BASE_URL=/api/v1
+JWT_SECRET=<your_secret>
 ```
 
 **Run Using Docker (recommended)**
