@@ -1,10 +1,8 @@
 const express = require('express');
-require('dotenv').config();
 
 const app = express();
-
-const PORT = process.env.PORT || 3131;
-const baseURL = '/api/v1';
+const PORT = process.env.PORT;
+const baseURL = process.env.BASE_URL;
 
 // Middlewares
 app.use(express.json());
