@@ -9,26 +9,18 @@ Affirmations mission is to help you gain self confidence, improve how you tackle
 1. Create a .env file and add the following configurations to the file
 
 ```bash
-PORT=4000
-MONGO_URI=<your_uri>
 BASE_URL=/api/v1
-JWT_SECRET=<your_secret>
+MONGO_URI=<YOUR_MONGO_URI>
+JWT_SECRET=<YOUR_JWT_SECRET>
+NODE_DOCKER_PORT=4000 (this is the port to start the node app on)
+# Note - client app starts on port 3000 and also 80 given NGINX as a reverse proxy. Regardless, the client will send api calls
+# and they will be proxied to the node container if prefixed with /api/v1
 ```
 
 **Run Using Docker (recommended)**
 
 ```bash
-# Docker build
-Make build-dev-image
-# Docker run
-Make run-dev-image
-# Ensure container is running (given it runs in detatched mode)
-docker ps -a | grep node-app
+Make up-dev # go to localhost:80
 ```
 
-**Run Using NPM**
-
-```bash
-npm install
-npm run server
-```
+### App Architecture

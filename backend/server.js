@@ -6,7 +6,7 @@ const connectDB = require('./config/connectDB');
 connectDB();
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.NODE_DOCKER_PORT || 4000;
 const baseURL = process.env.BASE_URL;
 
 // Middlewares
