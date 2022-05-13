@@ -1,4 +1,9 @@
 const express = require('express');
+const errorHandler = require('./middlewares/errorMiddleware');
+const connectDB = require('./config/connectDB');
+
+// Connect to MongoDB Database (ensure you added MONGO_URI to .env)
+connectDB();
 
 const app = express();
 const PORT = process.env.PORT;
@@ -10,5 +15,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use(`${baseURL}/affirmations`, require('./routes/affirmationRoutes'));
+
+// Handle errors
+app.use(errorHandler);
 
 app.listen(PORT, console.log(`Server listening on port ${PORT}`));
