@@ -11,6 +11,7 @@ Affirmations mission is to help you gain self confidence, improve how you tackle
 ```bash
 PORT=4000
 MONGO_URI=<your_uri>
+BASE_URL=/api/v1
 ```
 
 **Run Using Docker (recommended)**
