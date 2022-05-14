@@ -1,21 +1,24 @@
 const express = require('express');
 const errorHandler = require('./middlewares/errorMiddleware');
 const connectDB = require('./config/connectDB');
+const cors = require('cors');
+
+app.use(cors());
 
 // Connect to MongoDB Database (ensure you added MONGO_URI to .env)
 connectDB();
 
 const app = express();
 const PORT = process.env.NODE_DOCKER_PORT || 4000;
-const baseURL = process.env.BASE_URL;
+const VERSION = process.env.VERSION;
 
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-app.use(`${baseURL}/affirmations`, require('./routes/affirmationRoutes'));
-app.use(`${baseURL}/users`, require('./routes/userRoutes'));
+app.use(`/api/${VERSION}/affirmations`, require('./routes/affirmationRoutes'));
+app.use(`/api/${VERSION}/users`, require('./routes/userRoutes'));
 
 // Handle errors
 app.use(errorHandler);

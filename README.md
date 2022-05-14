@@ -9,7 +9,7 @@ Affirmations mission is to help you gain self confidence, improve how you tackle
 1. Create a .env file and add the following configurations to the file
 
 ```bash
-BASE_URL=/api/v1
+VERSION=v1
 MONGO_URI=<YOUR_MONGO_URI>
 JWT_SECRET=<YOUR_JWT_SECRET>
 NODE_DOCKER_PORT=4000 (this is the port to start the node app on)
