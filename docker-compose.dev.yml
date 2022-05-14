@@ -11,6 +11,8 @@ services:
       context: ./nginx
     env_file:
       - .env
+    volumes:
+      - ./nginx:/app
     ports:
       - '80:80'
   backend:

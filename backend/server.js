@@ -3,8 +3,6 @@ const errorHandler = require('./middlewares/errorMiddleware');
 const connectDB = require('./config/connectDB');
 const cors = require('cors');
 
-app.use(cors());
-
 // Connect to MongoDB Database (ensure you added MONGO_URI to .env)
 connectDB();
 
@@ -13,6 +11,7 @@ const PORT = process.env.NODE_DOCKER_PORT || 4000;
 const VERSION = process.env.VERSION;
 
 // Middlewares
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
