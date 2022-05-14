@@ -1,0 +1,43 @@
+name: Deploy Affirmations
+
+# Only deploy on pushes to main branch
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Login to Docker hub and then perform tests
+      - uses: actions/checkout@v2
+      - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+      - run: docker build -t tannermbarcelos/react-test -f ./frontend/Dockerfile.dev ./frontend
+      - run: docker run -e CI=true tannermbarcelos/react-tests npm test
+
+      # Build the Production Docker Images
+      - run: docker build -t tannermbarcelos/affirmations-frontend ./frontend
+      - run: docker build -t tannermbarcelos/affirmations-nginx ./nginx
+      - run: docker build -t tannermbarcelos/affirmations-nodeapp ./server
+
+      # Push those new Production Docker Images to DockerHub
+      - run: docker push tannermbarcelos/affirmations-frontend
+      - run: docker push tannermbarcelos/affirmations-nginx
+      - run: docker push tannermbarcelos/affirmations-nodeapp
+
+      # Zip up contents of app to be deployed into EB
+      - name: Zip and Generate deployment package
+        run: zip -r deploy.zip . -x '*.git*'
+
+      # Deploy the app to Elastic Beanstalk using secrets
+      - name: Deploy to Elastic Beanstalk
+        uses: einaregilsson/beanstalk-deploy@v18
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+          application_name: ${{ secrets.APP_NAME }}
+          environment_name: ${{ secrets.APP_ENV }}
+          existing_bucket_name: ${{ secrets.EB_BUCKET_NAME }}
+          region: us-west-2
+          version_label: ${{ github.sha }}
+          deployment_package: deploy.zip
