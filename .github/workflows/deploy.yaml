@@ -18,7 +18,7 @@ jobs:
       # Build the Production Docker Images
       - run: docker build -t tannermbarcelos/affirmations-frontend ./frontend
       - run: docker build -t tannermbarcelos/affirmations-nginx ./nginx
-      - run: docker build -t tannermbarcelos/affirmations-nodeapp ./server
+      - run: docker build -t tannermbarcelos/affirmations-nodeapp ./backend
 
       # Push those new Production Docker Images to DockerHub
       - run: docker push tannermbarcelos/affirmations-frontend
