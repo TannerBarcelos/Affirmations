@@ -2,43 +2,21 @@ version: '3'
 services:
   nginx:
     container_name: 'nginx'
-    depends_on:
-      - backend
-      - frontend
-    restart: always
-    build:
-      dockerfile: Dockerfile
-      context: ./nginx
-    env_file:
-      - .env
+    mem_limit: 128m
+    hostname: nginx
     ports:
       - '80:80'
+    image: 'tannermbarcelos/affirmations-nginx'
   backend:
-    container_name: 'backend'
-    build:
-      dockerfile: Dockerfile
-      context: './backend'
-    volumes:
-      - /app/node_modules
-      - ./backend:/app
-    ports:
-      - '4000:4000'
-    env_file:
-      - .env
-  frontend:
-    container_name: 'frontend'
-    stdin_open: true
-    restart: 'no'
+    image: 'tannermbarcelos/affirmations-nodeapp'
+    mem_limit: 128m
+    hostname: backend
     environment:
-      - NODE_ENV=development
-      - CHOKIDAR_USEPOLLING=true
-    build:
-      dockerfile: Dockerfile
-      context: ./frontend
-    volumes:
-      - /app/node_modules
-      - ./frontend:/app
-    env_file:
-      - .env
-    depends_on:
-      - backend
+      - VERSION=$VERSION
+      - MONGO_URI=$MONGO_URI
+      - JWT_SECRET=$JWT_SECRET
+      - NODE_DOCKER_PORT=$PORT
+  frontend:
+    mem_limit: 128m
+    hostname: frontend
+    image: 'tannermbarcelos/affirmations-frontend'

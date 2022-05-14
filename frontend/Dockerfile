@@ -6,8 +6,8 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# Stage 2 - Deploy on Nginx
+# Stage 2 - Deploy on Nginx to port 3000 so app works correctly in production
 FROM nginx
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/build /usr/share/nginx/html
-EXPOSE 80
-CMD nginx -g 'daemon off;'
+EXPOSE 3000
