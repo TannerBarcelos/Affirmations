@@ -16,6 +16,7 @@ services:
       - MONGO_URI=$MONGO_URI
       - JWT_SECRET=$JWT_SECRET
       - NODE_DOCKER_PORT=$PORT
+      - NODE_ENV=$NODE_ENV
   frontend:
     mem_limit: 128m
     hostname: frontend
