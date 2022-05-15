@@ -26,6 +26,12 @@ const getSingleAffirmation = asyncHandler(async (request, response) => {
     throw new Error('This affirmation does not exist');
   }
 
+  // Make sure the authenticated user is the same user as the one attached to this affirmation (using the ID as the predicate)
+  if (affirmation.user.toString() !== user.id) {
+    response.status(401);
+    throw new Error('User not authorized');
+  }
+
   response.status(200).json(affirmation);
 });
 
