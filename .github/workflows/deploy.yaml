@@ -1,6 +1,4 @@
 name: Deploy Affirmations
-
-# Only deploy on pushes to main branch
 on:
   push:
     branches:
