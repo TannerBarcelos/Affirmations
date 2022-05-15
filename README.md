@@ -4,6 +4,10 @@ Affirmation is an application that let's you create daily affirmations of positi
 
 Affirmations mission is to help you gain self confidence, improve how you tackle and improve your mental health and foster the ability to think and learn from your past to improve your future.
 
+#### Status
+
+[![Deploy Affirmations](https://github.com/TannerBarcelos/Affirmation/actions/workflows/deploy.yaml/badge.svg?branch=main)](https://github.com/TannerBarcelos/Affirmation/actions/workflows/deploy.yaml)
+
 #### Run the App
 
 1. Create a .env file and add the following configurations to the file
