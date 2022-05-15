@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif&display=swap');
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'PT Serif', serif;
+}
+
+/* HEADER STYLES */
+.header {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  height: 4em;
+  font-size: 1rem;
+}
+
+.header .logo {
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.header .nav-list {
+  list-style-type: none;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 1rem 0;
+  min-width: 200px;
+  display: flex;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 90px;
+}
+
+.nav-item-link-logo {
+  color: black;
+  text-decoration: none;
+  padding: 0.8rem;
+}
+
+.nav-item-menu-icon {
+  display: none;
+  font-size: 1.4rem;
+}
+
+.nav-item-link {
+  color: black;
+  text-decoration: none;
+  padding: 0.8rem;
+}
+
+.nav-item-link:hover {
+  border-radius: 3px;
+  background-color: rgba(244, 233, 233, 0.455);
+}
+
+.responsive-links {
+  width: 100vw;
+  background-color: rgba(141, 208, 177, 0.365);
+  margin-bottom: 2rem;
+  padding: 1rem;
+}
+
+.responsive-links a {
+  color: rgb(0, 0, 0);
+}
+
+/*Media Query to Show Menu Button on Small Screens*/
+@media screen and (max-width: 600px) {
+  .header .nav-item:not(:last-child) {
+    display: none;
+  }
+  .header .nav-list {
+    width: 20px;
+    padding-right: 2rem;
+    justify-content: right;
+  }
+  .header .nav-item-menu-icon {
+    display: block;
+  }
+}

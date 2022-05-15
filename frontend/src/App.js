@@ -1,14 +1,29 @@
-import { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+// Main Page Imports
+import Home from './pages/Home.jsx';
+import Dashboard from './pages/Dashboard.jsx';
+import Login from './pages/Login.jsx';
+import Register from './pages/Register.jsx';
+
+// Component Imports
+import Header from './components/header/Header.jsx';
+
 function App() {
-  useEffect(() => {
-    fetch('/api/v1/affirmations').then((res) => {
-      res.json().then((data) => console.log(data));
-    });
-  });
   return (
-    <div className='App'>
-      <h1>Hello, world</h1>
-    </div>
+    <>
+      <Router>
+        <div className='container'>
+          <Header />
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/dashboard' element={<Dashboard />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
+          </Routes>
+        </div>
+      </Router>
+    </>
   );
 }
 
