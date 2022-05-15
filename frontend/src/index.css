@@ -93,7 +93,7 @@
   }
 
   .header .logo {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
   .header .nav-item:not(:last-child) {
     display: none;
@@ -103,11 +103,10 @@
     position: absolute;
     top: 1.3rem;
     right: 2rem;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
   }
 
-  li:hover,
-  a:hover {
+  .nav-item-link:hover {
     background: none;
   }
 }
