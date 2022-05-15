@@ -6,6 +6,11 @@
   font-family: 'PT Serif', serif;
 }
 
+.container {
+  width: 86vw;
+  margin: 0 auto;
+}
+
 /* HEADER STYLES */
 .header {
   padding: 1rem;
@@ -66,9 +71,13 @@
 
 .responsive-links {
   width: 100vw;
+  height: 12rem;
   background-color: rgba(141, 208, 177, 0.365);
   margin-bottom: 2rem;
-  padding: 1rem;
+  padding: 0.7rem;
+  font-size: 14px;
+  margin-top: -5rem;
+  padding-top: 5rem;
 }
 
 .responsive-links a {
@@ -77,15 +86,29 @@
 
 /*Media Query to Show Menu Button on Small Screens*/
 @media screen and (max-width: 600px) {
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .header .logo {
+    font-size: 1.2rem;
+  }
   .header .nav-item:not(:last-child) {
     display: none;
   }
-  .header .nav-list {
-    width: 20px;
-    padding-right: 2rem;
-    justify-content: right;
-  }
   .header .nav-item-menu-icon {
     display: block;
+    position: absolute;
+    top: 1.3rem;
+    right: 2rem;
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .header .logo {
+    font-size: 1rem;
   }
 }
