@@ -38,6 +38,6 @@ jobs:
           application_name: ${{ secrets.APP_NAME }}
           environment_name: ${{ secrets.APP_ENV }}
           existing_bucket_name: ${{ secrets.EB_BUCKET_NAME }}
-          region: us-west-2
+          region: ${{ secrets.EB_REGION }}
           version_label: ${{ github.sha }}
           deployment_package: deploy.zip
