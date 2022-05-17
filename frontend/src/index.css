@@ -4,8 +4,10 @@
   --root-color: black;
   --base-color: #1a3c40;
   --secondary-color: #417d7a;
+  --secondary-color-opaque: #417d7a28;
   --accent-color: #ede6db;
   --mute-color: #1d5c63;
+  --mute-color-hover: #1d5c63c8;
   --radius: 10px;
 }
 
@@ -77,7 +79,7 @@
 .responsive-links {
   width: 100%;
   min-height: 5rem;
-  background-color: var(--accent-color);
+  background-color: var(--secondary-color-opaque);
   margin-bottom: 2rem;
   font-size: 14px;
   margin-top: 0rem;
@@ -89,6 +91,77 @@
   color: rgb(0, 0, 0);
 }
 
+/*****************************************/
+
+/* REGISTER PAGE STYLES */
+.register-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 900px;
+  min-height: 50vh;
+  margin: 6rem auto;
+  background-color: var(--secondary-color-opaque);
+  border-radius: var(--radius);
+}
+
+.register-container .heading {
+  width: 100%;
+  padding: 1rem;
+  color: var(--primary-color);
+}
+
+.register-container .heading h1 {
+  font-size: 2rem;
+}
+
+.register-container .heading p {
+  font-size: 14px;
+  padding: 0.4rem 0;
+  color: var(--secondary-color);
+}
+
+.register-container .register-form {
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+}
+
+.register-container .register-form .form-group {
+  width: 100%;
+  border-radius: 3px;
+  height: 3rem;
+  margin-bottom: 1rem;
+}
+
+.register-container .register-form .form-group input {
+  width: 100%;
+  border-radius: 3px;
+  border: none;
+  height: 100%;
+  padding: 0 0 0 1rem;
+}
+
+.btn {
+  border-radius: var(--radius);
+  border: none;
+  background-color: var(--mute-color);
+  color: var(--accent-color);
+  display: block;
+}
+
+.btn:hover {
+  cursor: pointer;
+  background-color: var(--mute-color-hover);
+}
+
+.register-container .register-form .form-group .btn {
+  width: 10rem;
+  height: 2.6rem;
+  margin-top: 2rem;
+  font-size: 1rem;
+}
+/*****************************************/
 @media screen and (min-width: 600px) {
   .nav-item-link:hover {
     color: var(--mute-color);
@@ -126,5 +199,16 @@
 
   .nav-item-link {
     padding: 0.6rem 0;
+  }
+
+  .register-container {
+    margin: 2rem auto;
+  }
+
+  .register-container .register-form .form-group .btn {
+    width: 100%;
+    height: 2.3rem;
+    margin-top: 2rem;
+    font-size: 0.9rem;
   }
 }

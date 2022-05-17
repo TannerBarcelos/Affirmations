@@ -43,7 +43,6 @@ const registerUser = asyncHandler(async (request, response) => {
   if (newUser) {
     response.status(201);
     response.json({
-      message: 'User created!',
       _id: newUser.id, // return as _id since this is the syntax MongoDB uses and once in client, this make it easy to differentiate
       age,
       email,
