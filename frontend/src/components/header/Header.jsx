@@ -45,17 +45,13 @@ const Header = () => {
             <li className='nav-item'>
               <Link to='login' className='nav-item-link'>
                 <i className='fa-solid fa-circle-user'></i>
-                <span style={{ display: 'inline-block', paddingLeft: '1rem' }}>
-                  Login
-                </span>
+                <span style={{ display: 'inline-block' }}>Login</span>
               </Link>
             </li>
             <li className='nav-item'>
               <Link to='register' className='nav-item-link'>
                 <i className='fa-solid fa-user-plus'></i>
-                <span style={{ display: 'inline-block', paddingLeft: '1rem' }}>
-                  Register
-                </span>
+                <span style={{ display: 'inline-block' }}>Register</span>
               </Link>
             </li>
           </ul>
