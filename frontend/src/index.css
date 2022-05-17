@@ -6,6 +6,7 @@
   --secondary-color: #417d7a;
   --accent-color: #ede6db;
   --mute-color: #1d5c63;
+  --radius: 10px;
 }
 
 * {
@@ -74,14 +75,14 @@
 }
 
 .responsive-links {
-  width: 100vw;
-  height: 12rem;
-  background-color: rgba(141, 208, 177, 0.365);
+  width: 100%;
+  min-height: 5rem;
+  background-color: var(--accent-color);
   margin-bottom: 2rem;
-  padding: 0.7rem;
   font-size: 14px;
-  margin-top: -5rem;
-  padding-top: 5rem;
+  margin-top: 0rem;
+  padding: 0.5rem 0.7rem;
+  border-radius: var(--radius);
 }
 
 .responsive-links a {
@@ -100,6 +101,10 @@
   body {
     max-width: 100%;
     overflow-x: hidden;
+  }
+
+  .nav-item:nth-child(1) {
+    border-bottom: 0.3px solid var(--base-color);
   }
 
   .header .logo {

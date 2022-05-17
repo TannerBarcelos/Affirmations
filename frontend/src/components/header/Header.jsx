@@ -6,7 +6,11 @@ const Header = () => {
     <>
       <header className='header'>
         <div className='logo'>
-          <Link to='/' className='nav-item-link-logo'>
+          <Link
+            to='/'
+            className='nav-item-link-logo'
+            onClick={(e) => setIsShowing(false)}
+          >
             Affirmations
           </Link>
         </div>
@@ -42,7 +46,7 @@ const Header = () => {
       {isShowing && (
         <div className='responsive-links'>
           <ul className={`nav-list${isShowing ? ' responsive' : ''}`}>
-            <li className='nav-item'>
+            <li className='nav-item' onClick={(e) => setIsShowing(false)}>
               <Link to='login' className='nav-item-link'>
                 <i className='fa-solid fa-circle-user'></i>
                 <span style={{ display: 'inline-block', paddingLeft: '1rem' }}>
@@ -50,7 +54,7 @@ const Header = () => {
                 </span>
               </Link>
             </li>
-            <li className='nav-item'>
+            <li className='nav-item' onClick={(e) => setIsShowing(false)}>
               <Link to='register' className='nav-item-link'>
                 <i className='fa-solid fa-user-plus'></i>
                 <span style={{ display: 'inline-block', paddingLeft: '1rem' }}>
