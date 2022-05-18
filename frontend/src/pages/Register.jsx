@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Loader from 'react-spinners/GridLoader';
 import { toast } from 'react-toastify';
 import { register, reset } from '../features/auth/authSlice';
@@ -70,11 +70,11 @@ const Register = () => {
   };
 
   return (
-    <div className='register-container'>
+    <div className='auth-container'>
       <section className='heading'>
         <h1>Register</h1>
       </section>
-      <section className='register-form'>
+      <section className='auth-form'>
         <form onSubmit={onSubmit}>
           <div className='form-group'>
             {' '}
@@ -137,6 +137,13 @@ const Register = () => {
             </button>
           </div>
         </form>
+        <p style={{ padding: '1.4rem 0', fontSize: '.9rem' }}>
+          Already a member?
+          <Link to={'/login'}>
+            {' '}
+            <span>Login</span>
+          </Link>
+        </p>
       </section>
     </div>
   );

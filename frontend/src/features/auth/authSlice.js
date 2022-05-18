@@ -31,6 +31,19 @@ export const register = createAsyncThunk(
   },
 );
 
+// Register User
+export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
+  try {
+    return await services.auth.login(user);
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
 export const authSlice = createSlice({
   // Name of this slice of state
   name: 'auth',
@@ -62,6 +75,20 @@ export const authSlice = createSlice({
         state.isSuccess = false;
         state.isError = true;
         state.message = action.payload; // the rejected with value message from the async register function (register action retuns a reject action with message from our backend for fails)
+      })
+      .addCase(login.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = action.payload;
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.message = action.payload;
       });
   },
 });

@@ -7,7 +7,13 @@ const services = {
     register: async (user) => {
       const { data } = await axios.post(`${API_URL}/register`, user);
       if (data) {
-        localStorage.setItem('user', JSON.stringify(data)); // If data comes back, this means we have success and got the JWT from the register route in our API. set the token in localStorage as 'user' (see access in authSlice)
+        localStorage.setItem('user', JSON.stringify(data)); // Store user that comes back from this endpoint in localStorage (also contains JWT which is a must)
+      }
+    },
+    login: async (user) => {
+      const { data } = await axios.post(`${API_URL}/login`, user);
+      if (data) {
+        localStorage.setItem('user', JSON.stringify(data));
       }
     },
   },
