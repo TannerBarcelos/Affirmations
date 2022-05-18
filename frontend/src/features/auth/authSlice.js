@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import services from '../../config/services';
+import services from '../../utils/services';
 
 // Get JWT from Local Storage - Contains user data + JWT which is necessary to make api calls to protected endpoints!
 const user = JSON.parse(localStorage.getItem('user'));
@@ -44,6 +44,11 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
   }
 });
 
+// Logout User
+export const logout = createAsyncThunk('auth/logout', async () => {
+  await services.auth.logout();
+});
+
 export const authSlice = createSlice({
   // Name of this slice of state
   name: 'auth',
@@ -59,7 +64,7 @@ export const authSlice = createSlice({
       state.message = '';
     },
   },
-  // Async reducer loading lifecylce stuff goes here (pending [loadng], fulfilled [success], rejected [40* error from abckend with message])
+  // Async reducer loading lifecycle stuff goes here (pending [loadng], fulfilled [success], rejected [40* error from abckend with message])
   extraReducers: (builder) => {
     builder
       .addCase(register.pending, (state) => {
@@ -86,9 +91,12 @@ export const authSlice = createSlice({
       })
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = false;
         state.isError = true;
         state.message = action.payload;
+        state.user = null;
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.user = null;
       });
   },
 });

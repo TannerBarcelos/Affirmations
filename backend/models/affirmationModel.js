@@ -2,21 +2,25 @@ const mongoose = require('mongoose');
 
 const affirmationSchema = mongoose.Schema(
   {
-    // A user is related to an affirmation (many) via their ID as a PK
+    // A user is related to an affirmation (many) via their ID
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: 'User',
     },
-    mood: {
+    startMood: {
       type: String,
-      required: [true, 'Please add a mood'],
+      required: [true, 'Please add a starting mood'],
+    },
+    endMood: {
+      type: String,
+      required: [true, 'Please add a ending mood'],
     },
     affirmation: {
       type: String,
       required: [true, 'Please add a affirmation'],
     },
-    node: {
+    note: {
       type: String,
       required: false,
     },

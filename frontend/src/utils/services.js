@@ -9,12 +9,17 @@ const services = {
       if (data) {
         localStorage.setItem('user', JSON.stringify(data)); // Store user that comes back from this endpoint in localStorage (also contains JWT which is a must)
       }
+      return data;
     },
     login: async (user) => {
       const { data } = await axios.post(`${API_URL}/login`, user);
       if (data) {
         localStorage.setItem('user', JSON.stringify(data));
       }
+      return data;
+    },
+    logout: () => {
+      localStorage.removeItem('user');
     },
   },
 };

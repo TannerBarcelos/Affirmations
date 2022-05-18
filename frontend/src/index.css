@@ -162,6 +162,28 @@
   margin-top: 2rem;
   font-size: 1rem;
 }
+
+.nav-item-logout {
+  list-style: none;
+  padding: 0.6rem 0;
+}
+
+.nav-item-logout:hover {
+  cursor: pointer;
+}
+
+.logout-btn {
+  background-color: var(--base-color);
+  height: 2.5rem;
+  padding: 0.8rem;
+  border-radius: var(--radius);
+  color: white;
+}
+
+.logout-btn:hover {
+  cursor: pointer;
+  background-color: rgb(105, 105, 105);
+}
 /*****************************************/
 @media screen and (min-width: 600px) {
   .nav-item-link:hover {
@@ -175,10 +197,6 @@
   body {
     max-width: 100%;
     overflow-x: hidden;
-  }
-
-  .nav-item:nth-child(1) {
-    border-bottom: 0.3px solid var(--base-color);
   }
 
   .header .logo {

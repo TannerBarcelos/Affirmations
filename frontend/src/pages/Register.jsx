@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import Loader from 'react-spinners/GridLoader';
 import { toast } from 'react-toastify';
 import { register, reset } from '../features/auth/authSlice';
 
@@ -20,7 +19,7 @@ const Register = () => {
   // Redux Stuff
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
+  const { user, isError, isSuccess, message } = useSelector(
     (state) => state.auth,
   );
 
