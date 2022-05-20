@@ -36,3 +36,4 @@ Make up-dev # go to localhost:80
 <hr>
 
 ### App Architecture
+![Architecture](https://github.com/TannerBarcelos/Affirmation/blob/main/AffirmationsArchitecture.drawio.png)
