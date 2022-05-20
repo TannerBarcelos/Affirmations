@@ -9,9 +9,7 @@ const Home = () => {
       <section className='hero'>
         <div className='cta'>
           <h1 id='cta-heading'>Gain Control of Your Mental Health</h1>
-          <p id='cta-slogan'>
-            Put confidence in your day with just a few clicks
-          </p>
+          <p id='cta-slogan'>Put confidence in your day</p>
           <button
             className='btn cta-start'
             onClick={(e) => navigate('/register')}

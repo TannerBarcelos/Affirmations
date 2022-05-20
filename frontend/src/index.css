@@ -329,4 +329,68 @@
     margin-top: 2rem;
     font-size: 0.9rem;
   }
+
+  .hero {
+    margin: 0 auto;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+
+  .explain {
+    margin: 1rem auto 0.5rem auto;
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .explain-image {
+    display: none;
+  }
+
+  .sell {
+    grid-row-start: 1;
+  }
+  .sell h2 {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+
+  .sell p {
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .cta {
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+  }
+
+  .cta-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #mental-img {
+    width: 15rem;
+    height: 15rem;
+  }
+
+  .cta #cta-heading {
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .cta #cta-slogan {
+    font-size: 1rem;
+    margin-top: 1.5rem;
+    font-weight: 300;
+  }
+
+  .cta .cta-start {
+    width: 80%;
+    height: 2.3rem;
+    margin-top: 2rem;
+    font-size: 0.8rem;
+  }
 }
