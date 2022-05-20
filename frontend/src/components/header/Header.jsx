@@ -19,7 +19,11 @@ const Header = () => {
     if (user) {
       return (
         <>
-          <li className='nav-item'></li>
+          <li className='nav-item home-icon'>
+            <Link to='dashboard' className='nav-item-link'>
+              <i className='fa-solid fa-house-user'></i>
+            </Link>
+          </li>
           <li className='nav-item logout-btn' onClick={onLogout}>
             <i className='fa-solid fa-arrow-right-from-bracket'></i>
             <span style={{ display: 'inline-block', paddingLeft: '1rem' }}>
