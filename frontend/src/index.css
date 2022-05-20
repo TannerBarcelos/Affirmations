@@ -26,7 +26,7 @@
 
 /* HEADER STYLES */
 .header {
-  padding: 1rem 0;
+  padding: 2rem 2rem 2.5rem 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -34,6 +34,9 @@
   width: 100%;
   height: 4em;
   font-size: 1rem;
+  -webkit-box-shadow: 0px 0px 8px rgb(170, 170, 170);
+  -moz-box-shadow: 0px 0px 8px rgb(187, 187, 187);
+  box-shadow: 0px 0px 8px rgb(187, 187, 187);
 }
 
 .header .logo {
@@ -184,6 +187,93 @@
   cursor: pointer;
   background-color: rgb(105, 105, 105);
 }
+
+/* LANDING PAGE STYLES*/
+.hero {
+  margin: 8rem auto 0 auto;
+  max-width: 90rem;
+  min-height: 40vh;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.cta {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.cta-2 {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cta #cta-heading {
+  font-size: 4rem;
+  font-weight: 500;
+}
+
+.cta #cta-slogan {
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  font-weight: 300;
+}
+
+.cta .cta-start {
+  width: 9rem;
+  height: 3.5rem;
+  margin-top: 4rem;
+  font-size: 1rem;
+}
+
+#mental-img {
+  width: 30rem;
+  height: 30rem;
+}
+
+#click-img {
+  width: 25rem;
+  height: 25rem;
+}
+
+.explain {
+  margin: 0 auto;
+  max-width: 90rem;
+  min-height: 28rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.sell {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+}
+
+.explain-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.sell p {
+  padding-top: 2rem;
+  line-height: 1.7rem;
+}
+
 /*****************************************/
 @media screen and (min-width: 600px) {
   .nav-item-link:hover {
@@ -197,6 +287,10 @@
   body {
     max-width: 100%;
     overflow-x: hidden;
+  }
+
+  .header {
+    box-shadow: none;
   }
 
   .header .logo {
