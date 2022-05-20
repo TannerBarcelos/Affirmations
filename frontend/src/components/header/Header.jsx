@@ -74,7 +74,7 @@ const Header = () => {
               </li>
               <li className='nav-item' onClick={(e) => setIsShowing(false)}>
                 <Link to='/dashboard' className='nav-item-link'>
-                  <i className='fa-solid fa-sheet-plastic'></i>
+                  <i className='fa-solid fa-house-user'></i>
                   <span
                     style={{ display: 'inline-block', paddingLeft: '1rem' }}
                   >
