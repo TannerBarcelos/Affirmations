@@ -5,7 +5,6 @@
 [![Deploy Affirmations](https://github.com/TannerBarcelos/Affirmation/actions/workflows/deploy.yaml/badge.svg?branch=main)](https://github.com/TannerBarcelos/Affirmation/actions/workflows/deploy.yaml)
 
 **See deployed app [here](affirmations.life)**
-affirmations.life
 
 <hr>
 
