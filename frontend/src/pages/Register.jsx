@@ -73,7 +73,7 @@ const Register = () => {
       <section className='heading'>
         <h1>Register</h1>
       </section>
-      <section className='auth-form'>
+      <section className='form'>
         <form onSubmit={onSubmit}>
           <div className='form-group'>
             {' '}

@@ -22,6 +22,7 @@ const services = {
       localStorage.removeItem('user');
     },
   },
+  affirmations: {},
 };
 
 export default services;
