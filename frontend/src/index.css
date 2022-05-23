@@ -89,9 +89,8 @@
   background-color: var(--secondary-color-opaque);
   margin-bottom: 2rem;
   font-size: 14px;
-  margin-top: 0rem;
+  margin-top: -1rem;
   padding: 0.5rem 0.7rem;
-  border-radius: var(--radius);
 }
 
 .responsive-links a {

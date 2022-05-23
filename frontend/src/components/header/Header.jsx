@@ -23,10 +23,17 @@ const Header = () => {
             <Link to='dashboard' className='nav-item-link'>
               <i className='fa-solid fa-house-user'></i>
             </Link>
+            <Link
+              to='settings'
+              className='nav-item-link'
+              style={{ marginRight: '1rem' }}
+            >
+              <i className='fa-solid fa-gear'></i>
+            </Link>
           </li>
           <li className='nav-item logout-btn' onClick={onLogout}>
             <i className='fa-solid fa-arrow-right-from-bracket'></i>
-            <span style={{ display: 'inline-block', paddingLeft: '1rem' }}>
+            <span style={{ display: 'inline-block', paddingLeft: '.4rem' }}>
               Logout
             </span>
           </li>
@@ -79,6 +86,16 @@ const Header = () => {
                     style={{ display: 'inline-block', paddingLeft: '1rem' }}
                   >
                     Dashboard
+                  </span>
+                </Link>
+              </li>
+              <li className='nav-item' onClick={(e) => setIsShowing(false)}>
+                <Link to='/settings' className='nav-item-link'>
+                  <i className='fa-solid fa-gear'></i>
+                  <span
+                    style={{ display: 'inline-block', paddingLeft: '1rem' }}
+                  >
+                    Settings
                   </span>
                 </Link>
               </li>

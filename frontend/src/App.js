@@ -1,11 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 // Main Page Imports
 import Home from './pages/Home.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
+import Settings from './pages/Settings.jsx';
 
 // Component Imports
 import Header from './components/header/Header.jsx';
@@ -21,6 +23,7 @@ function App() {
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
+            <Route path='/settings' element={<Settings />} />
           </Routes>
         </div>
       </Router>

@@ -21,7 +21,7 @@ const Dashboard = () => {
         <h1>Welcome, {user && user.name}</h1>
         <AffirmationForm />
       </section>
-      <section className='dashboard-affirmations'></section>
+      <section className='dashboard-section'></section>
     </div>
   );
 };
