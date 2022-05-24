@@ -307,16 +307,91 @@
 
 .dashboard-affirmations-container {
   width: 100%;
-  min-height: 10rem;
-  background-color: var(--secondary-color-opaque);
-  border-radius: var(--radius);
-  padding: 1rem;
   margin: 1rem 0;
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
   color: var(--primary-color);
+  align-items: flex-start;
 }
 
+.affirmation-card {
+  width: 20rem;
+  min-height: 20rem;
+  border: 1px solid var(--secondary-color-opaque);
+  display: flex;
+  flex-direction: column;
+  background-color: #eee;
+  position: relative;
+  border-radius: var(--radius);
+  margin: 1rem 0;
+}
+
+.affirmation-card .image {
+  width: 100;
+  height: 10rem;
+  border-radius: var(--radius);
+  border: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.affirmation-card .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: var(--radius);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border: none;
+}
+
+.affirmation-card .affirmation {
+  min-height: 5rem;
+  display: flex;
+  padding: 1rem;
+  margin: 0 0 2rem 0;
+  justify-content: left;
+  flex-direction: column;
+}
+
+.affirmation-card .update-box {
+  margin-top: 1.3rem;
+  height: 3rem;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  font-size: 1.2rem;
+  color: var(--secondary-color);
+}
+
+.affirmation-card .update-box i:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.affirmation-card .update-box i:nth-child(2) {
+  margin-left: 1.5rem;
+}
+
+.affirmation .affirmation-text {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.affirmation .affirmation-moods {
+  min-height: 3.3rem;
+  display: flex;
+  align-items: center;
+}
+
+.affirmation .affirmation-moods i {
+  font-size: 2rem;
+}
 /* AFFIRMATION FORM STYLES */
 .affirmation-form {
   width: 100%;
