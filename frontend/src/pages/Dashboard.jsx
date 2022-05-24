@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 // Component Import
-import AffirmationForm from '../components/affirmationComponents/AffirmationForm';
+import AffirmationForm from '../components/affirmationComponents/AffirmationForm.jsx';
 
 const Dashboard = () => {
   const navigate = useNavigate();
