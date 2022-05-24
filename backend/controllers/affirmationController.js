@@ -42,17 +42,18 @@ const getSingleAffirmation = asyncHandler(async (request, response) => {
  * @param {*} response - express response object
  */
 const createAffirmation = asyncHandler(async (request, response) => {
-  const { mood, affirmation } = request.body;
-  if (!mood || !affirmation) {
+  const { currentMood, affirmation } = request.body;
+  if (!currentMood || !affirmation) {
     response.status(400);
     throw new Error(
-      'You must submit an affirmation and mood to log this entry',
+      'You must submit an affirmation and your current mood to log this entry',
     );
   }
   const { id } = request.user;
   const affirm = await affirmationModel.create({
     user: id, // save the user by their ID who created this entry
-    mood,
+    startMood: currentMood,
+    endMood: '', // leave blank as this gets submited via the update mood later
     affirmation,
   });
   response.status(200).json(affirm);

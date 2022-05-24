@@ -1,15 +1,39 @@
-import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import moodIcons from '../../assets/icons/moodIcons';
+import { createAffirmation } from '../../features/affirmations/affirmationSlice';
+import { toast } from 'react-toastify';
 
 const AffirmationForm = () => {
   const [affirmation, setAffirmation] = useState('');
   const [currentMood, setCurrentMood] = useState('');
 
+  const dispatch = useDispatch();
+  const { isError, isSuccess, message } = useSelector(
+    (state) => state.affirmations,
+  );
+
   const onSubmit = (e) => {
     e.preventDefault();
-    const payload = { affirmation, currentMood };
-    console.log(payload);
+
+    if (!affirmation.length > 0 || !currentMood.length > 0) {
+      toast.error('You must enter an affirmation and a mood');
+      return;
+    }
+
+    const affirmationPayload = { affirmation, currentMood };
+    dispatch(createAffirmation(affirmationPayload)); // dispatch create affirmation
+
+    if (isSuccess) {
+      toast.success('Affirmation created!');
+    }
+
+    if (isError) {
+      toast.error('Something went wrong ' + message);
+    }
+
+    setAffirmation('');
+    setCurrentMood('');
   };
 
   return (

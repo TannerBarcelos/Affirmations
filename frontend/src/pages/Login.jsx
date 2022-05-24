@@ -31,8 +31,10 @@ const Login = () => {
         navigate('/dashboard');
       }, 2000);
     }
-
-    dispatch(reset());
+    // cleanup on un-mount
+    return () => {
+      dispatch(reset());
+    };
   }, [user, isError, isSuccess, message, navigate, dispatch]);
   const onChange = (e) => {
     setFormData({

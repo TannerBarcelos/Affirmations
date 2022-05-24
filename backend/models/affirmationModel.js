@@ -14,7 +14,7 @@ const affirmationSchema = mongoose.Schema(
     },
     endMood: {
       type: String,
-      required: [true, 'Please add a ending mood'],
+      required: false,
     },
     affirmation: {
       type: String,
