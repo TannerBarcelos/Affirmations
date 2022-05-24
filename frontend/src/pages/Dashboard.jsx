@@ -6,6 +6,7 @@ import {
   reset,
 } from '../features/affirmations/affirmationSlice';
 import { toast } from 'react-toastify';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 // Component Import
 import AffirmationForm from '../components/affirmationComponents/AffirmationForm.jsx';
@@ -43,7 +44,18 @@ const Dashboard = () => {
         <h1>Welcome, {user && user.name}</h1>
         <AffirmationForm />
       </section>
-      <section className='dashboard-affirmations-container'></section>
+      {isLoading ? (
+        <div className='loading-affirmations'>
+          <ClipLoader />
+        </div>
+      ) : affirmations.length === 0 ? (
+        <div className='no-affirmations'>
+          <h4>No Affirmations</h4>
+          <p>Go ahead and create one above!</p>
+        </div>
+      ) : (
+        <section className='dashboard-affirmations-container'></section>
+      )}
     </div>
   );
 };
