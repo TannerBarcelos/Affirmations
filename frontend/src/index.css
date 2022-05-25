@@ -307,7 +307,7 @@
 
 .dashboard-affirmations-container {
   width: 100%;
-  margin: 1rem 0;
+  margin: 1rem auto;
   display: flex;
   flex-wrap: wrap;
   color: var(--primary-color);
@@ -315,9 +315,9 @@
 }
 
 .affirmation-card {
-  flex: 0 0;
-  margin: 1rem auto;
-  width: 302px;
+  flex: 1;
+  margin: 1rem;
+  max-width: 300px;
   min-width: 302px;
   min-height: 20rem;
   border: 1px solid var(--secondary-color-opaque);
@@ -399,7 +399,6 @@
 .affirmation-form {
   width: 100%;
   min-height: 20rem;
-  background-color: var(--secondary-color-opaque);
   border-radius: var(--radius);
   padding: 1rem;
   margin: 1rem 0;
