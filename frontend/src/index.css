@@ -309,14 +309,16 @@
   width: 100%;
   margin: 1rem 0;
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
   color: var(--primary-color);
   align-items: flex-start;
 }
 
 .affirmation-card {
-  width: 20rem;
+  flex: 0 0;
+  margin: 1rem auto;
+  width: 302px;
+  min-width: 302px;
   min-height: 20rem;
   border: 1px solid var(--secondary-color-opaque);
   display: flex;
@@ -324,7 +326,6 @@
   background-color: #eee;
   position: relative;
   border-radius: var(--radius);
-  margin: 1rem 0;
 }
 
 .affirmation-card .image {
@@ -417,7 +418,7 @@
 }
 
 .affirmation-form .affirmation-box input {
-  width: 100%;
+  width: 35rem;
   height: 100%;
   border-radius: 5px;
   border: 1px solid var(--secondary-color);
@@ -455,7 +456,7 @@
 }
 
 .affirmation-form .mood-box {
-  width: 40%;
+  width: 35rem;
   height: 6rem;
   display: flex;
   align-items: center;
@@ -582,5 +583,41 @@
     height: 2.3rem;
     margin-top: 2rem;
     font-size: 0.8rem;
+  }
+
+  .dashboard-heading h1 {
+    text-align: center;
+  }
+
+  .mood-cta,
+  .affirmation-cta {
+    text-align: center;
+  }
+
+  .mood-box {
+    width: 100% !important;
+  }
+
+  .affirmation-form .affirmation-box {
+    width: 100%;
+  }
+  #affirmation-input {
+    width: 100% !important;
+  }
+
+  .affirmation-form button {
+    width: 100%;
+  }
+
+  .dashboard-affirmations-container {
+    padding: 0;
+  }
+
+  .affirmation-form .affirmation-box {
+    width: 100%;
+  }
+
+  .affirmation-card {
+    margin: 1rem auto;
   }
 }

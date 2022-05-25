@@ -38,20 +38,20 @@ const AffirmationForm = () => {
 
   return (
     <section className='form affirmation-form'>
-      <h2>Create Your Affirmation</h2>
+      <h2 className='affirmation-cta'>Create Your Affirmation</h2>
       <form onSubmit={onSubmit}>
         <div className='form-group affirmation-box'>
           <input
             autoFocus
             type='text'
             name='affirmation'
-            id='affirmation'
+            id='affirmation-input'
             value={affirmation}
             placeholder='Enter your affirmation'
             onChange={(e) => setAffirmation(e.target.value)}
           />
         </div>
-        <h3>Select Your Current Mood</h3>
+        <h3 className='mood-cta'>Select Your Current Mood</h3>
         <div className='form-group mood-box'>
           {Object.entries(moodIcons).map(([key, mood]) => {
             return (
