@@ -47,7 +47,7 @@ const services = {
       const { data } = await axios.delete(
         `${API_URL}${affirmationsAPI}/delete/${id}`, // the api is /api/v1/delete/:id
         options,
-      ); //returns delete affirmations ID
+      ); //returns delete affirmations ID (_id: sign)
       return data;
     },
     getAll: async (token) => {

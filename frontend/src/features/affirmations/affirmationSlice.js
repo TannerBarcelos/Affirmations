@@ -95,7 +95,7 @@ export const affirmationSlice = createSlice({
         state.isError = false;
         state.isSuccess = true;
         state.affirmations = state.affirmations.filter(
-          (aff) => aff._id !== action.payload, // action.payload contains the ID of the removed affirmation coming from the backend
+          (aff) => aff._id !== action.payload._id, // action.payload contains the ID of the removed affirmation coming from the backend
         );
       })
       .addCase(deleteAffirmation.rejected, (state, action) => {

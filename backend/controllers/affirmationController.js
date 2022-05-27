@@ -122,7 +122,7 @@ const deleteAffirmation = asyncHandler(async (request, response) => {
 
   // Delete if found and return the deleted affirmations ID so we can use that client side to filter the UI
   await affirmationModel.remove(affirm);
-  response.status(200).json(id);
+  response.status(200).json({ _id: id });
 });
 
 module.exports = {
