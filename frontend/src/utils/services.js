@@ -31,7 +31,6 @@ const services = {
           Authorization: `Bearer ${token}`, // the format we receive the auth token as in the server
         },
       };
-      console.log(affirmation);
       const { data } = await axios.post(
         `${API_URL}${affirmationsAPI}/create`,
         affirmation,
@@ -39,10 +38,22 @@ const services = {
       ); // returns created affirmation
       return data;
     },
+    delete: async (id, token) => {
+      const options = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const { data } = await axios.delete(
+        `${API_URL}${affirmationsAPI}/delete/${id}`, // the api is /api/v1/delete/:id
+        options,
+      ); //returns delete affirmations ID
+      return data;
+    },
     getAll: async (token) => {
       const options = {
         headers: {
-          Authorization: `Bearer ${token}`, // the format we receive the auth token as in the server
+          Authorization: `Bearer ${token}`,
         },
       };
       const { data } = await axios.get(

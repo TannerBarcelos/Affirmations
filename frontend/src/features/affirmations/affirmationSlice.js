@@ -46,6 +46,24 @@ export const getAffirmations = createAsyncThunk(
   },
 );
 
+export const deleteAffirmation = createAsyncThunk(
+  'affirmations/delete',
+  async (affirmation, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await services.affirmations.delete(affirmation._id, token); // this action should in turn return the ID of the deleted affirmation in the end
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  },
+);
+
 export const affirmationSlice = createSlice({
   name: 'affirmation',
   initialState,
@@ -68,6 +86,23 @@ export const affirmationSlice = createSlice({
         state.isError = true;
         state.isSuccess = true;
         state.message = action.payload; // error message that is returned on line 24 as a rejectWithValue
+      })
+      .addCase(deleteAffirmation.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteAffirmation.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.affirmations = state.affirmations.filter(
+          (aff) => aff._id !== action.payload, // action.payload contains the ID of the removed affirmation coming from the backend
+        );
+      })
+      .addCase(deleteAffirmation.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = true;
+        state.message = action.payload; // error message as a rejectWithValue
       })
       .addCase(getAffirmations.pending, (state) => {
         state.isLoading = true;

@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import moodIcons from '../assets/icons/moodIcons';
 import affirmationImages from '../assets/images/affirmationImages';
+import { deleteAffirmation } from '../features/affirmations/affirmationSlice';
+import { generateDate } from '../utils/helpers';
 
 import {
   getAffirmations,
@@ -43,7 +45,7 @@ const Dashboard = () => {
   const renderAffirmations = () => {
     return affirmations.map((affirm, idx) => {
       const { affirmation, startMood, endMood, createdAt, updatedAt } = affirm;
-      console.log(affirmation, startMood, endMood, createdAt, updatedAt);
+
       const moodIcon = moodIcons[startMood];
       return (
         <div className='affirmation-card' key={idx}>
@@ -76,14 +78,24 @@ const Dashboard = () => {
             </div>
           </div>
           <div className='update-box'>
+            {/* ADD EDIT FUNCTIONALITY IN V2
             <i
               className='fa-solid fa-pen-to-square'
-              title='Delete this Affirmation'
-            ></i>
+              title='Update this Affirmation'
+            ></i> */}
             <i
               className='fa-solid fa-trash'
               title='Delete this Affirmation'
+              onClick={(e) =>
+                dispatch(deleteAffirmation(affirm))
+              } /* pass whole affirmation to the delete action  */
             ></i>
+            <span
+              style={{ position: 'absolute', right: '1rem' }}
+              title='Affirmation created'
+            >
+              {generateDate(createdAt)}
+            </span>
           </div>
         </div>
       );
