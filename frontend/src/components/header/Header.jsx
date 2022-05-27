@@ -23,13 +23,13 @@ const Header = () => {
             <Link to='dashboard' className='nav-item-link'>
               <i className='fa-solid fa-house-user'></i>
             </Link>
-            <Link
+            {/* <Link
               to='settings'
               className='nav-item-link'
               style={{ marginRight: '1rem' }}
             >
               <i className='fa-solid fa-gear'></i>
-            </Link>
+            </Link> */}
           </li>
           <li className='nav-item logout-btn' onClick={onLogout}>
             <i className='fa-solid fa-arrow-right-from-bracket'></i>
@@ -89,7 +89,7 @@ const Header = () => {
                   </span>
                 </Link>
               </li>
-              <li className='nav-item' onClick={(e) => setIsShowing(false)}>
+              {/* <li className='nav-item' onClick={(e) => setIsShowing(false)}>
                 <Link to='/settings' className='nav-item-link'>
                   <i className='fa-solid fa-gear'></i>
                   <span
@@ -98,7 +98,7 @@ const Header = () => {
                     Settings
                   </span>
                 </Link>
-              </li>
+              </li> */}
               <li
                 style={{
                   listStyle: 'none',
