@@ -23,7 +23,7 @@ function App() {
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
-            <Route path='/settings' element={<Settings />} />
+            {/* <Route path='/settings' element={<Settings />} /> DISABLE FOR V1 */}
           </Routes>
         </div>
       </Router>
