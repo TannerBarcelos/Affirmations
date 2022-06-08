@@ -49,8 +49,6 @@ const registerUser = asyncHandler(async (request, response) => {
       token: generateToken(newUser.id),
     });
   }
-
-  response.send('Register user');
 });
 
 /**
@@ -81,8 +79,6 @@ const loginUser = asyncHandler(async (request, response) => {
     response.status(400);
     throw new Error('Invalid credentials. Please try again or sign up.');
   }
-
-  response.send('Login user');
 });
 
 /**
