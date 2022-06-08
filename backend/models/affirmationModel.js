@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 
 const affirmationSchema = mongoose.Schema(
   {
-    // A user is related to an affirmation (many) via their ID
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,

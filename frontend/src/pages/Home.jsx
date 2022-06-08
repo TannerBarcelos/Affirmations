@@ -30,11 +30,7 @@ const Home = () => {
           <p>
             By creating an affirmation and choosing your mood from a curated
             list of moods, we help you track how your mood and affirmations play
-            a role in your overall mental health. At the end of the day, log
-            your mood and leave a note on how your affirmation helped improve
-            your day and how you approached it. The app will look back in time
-            and tell you how your moods changed overtime in relation to the
-            affirmations you create.
+            a role in your overall mental health.
           </p>
         </div>
       </section>

@@ -13,7 +13,7 @@ export const createAffirmation = createAsyncThunk(
   'affirmations/create',
   async (affirmation, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.token; // pulling out token from the current state (using getState()) of the auth state which contains the user with the auth token
+      const token = thunkAPI.getState().auth.user.token;
       return await services.affirmations.create(affirmation, token);
     } catch (error) {
       const message =
@@ -29,10 +29,9 @@ export const createAffirmation = createAsyncThunk(
 
 export const getAffirmations = createAsyncThunk(
   'affirmations/get',
-  // takes in no data as this is just plain get request. So, in Redux Toolkit, the first arg is an underscore
   async (_, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.token; // pulling out token from the current state (using getState()) of the auth state which contains the user with the auth token
+      const token = thunkAPI.getState().auth.user.token;
       return await services.affirmations.getAll(token);
     } catch (error) {
       const message =
@@ -51,7 +50,7 @@ export const deleteAffirmation = createAsyncThunk(
   async (affirmation, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await services.affirmations.delete(affirmation._id, token); // this action should in turn return the ID of the deleted affirmation in the end
+      return await services.affirmations.delete(affirmation._id, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -79,13 +78,13 @@ export const affirmationSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.affirmations.push(action.payload); // add the newly created affirmation to our state (this comes from line 16 above)
+        state.affirmations.push(action.payload);
       })
       .addCase(createAffirmation.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = true;
-        state.message = action.payload; // error message that is returned on line 24 as a rejectWithValue
+        state.message = action.payload;
       })
       .addCase(deleteAffirmation.pending, (state) => {
         state.isLoading = true;
@@ -95,14 +94,14 @@ export const affirmationSlice = createSlice({
         state.isError = false;
         state.isSuccess = true;
         state.affirmations = state.affirmations.filter(
-          (aff) => aff._id !== action.payload._id, // action.payload contains the ID of the removed affirmation coming from the backend
+          (aff) => aff._id !== action.payload._id,
         );
       })
       .addCase(deleteAffirmation.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = true;
-        state.message = action.payload; // error message as a rejectWithValue
+        state.message = action.payload;
       })
       .addCase(getAffirmations.pending, (state) => {
         state.isLoading = true;
@@ -111,13 +110,13 @@ export const affirmationSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.affirmations = action.payload; // add all returned affirmations to state
+        state.affirmations = action.payload;
       })
       .addCase(getAffirmations.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = true;
-        state.message = action.payload; // error message that is returned on line 24 as a rejectWithValue
+        state.message = action.payload;
       });
   },
 });

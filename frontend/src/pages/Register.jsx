@@ -13,10 +13,8 @@ const Register = () => {
     age: '',
   });
 
-  // Form data
   const { name, email, password, password2, age } = formData;
 
-  // Redux Stuff
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user, isError, isSuccess, message } = useSelector(
@@ -24,17 +22,14 @@ const Register = () => {
   );
 
   useEffect(() => {
-    // Check if error occurs
     if (isError) {
       toast.error(message);
     }
 
-    // If user exists (they are in redux state) just go to dashboard
     if (user) {
       navigate('/dashboard');
     }
-    // If no errors occured from register, isSuccess should turn to true due to builder
-    // OR if user exists (they already signed in and tried to access register again)
+
     if (isSuccess) {
       toast.success('User Created!');
       setTimeout(() => {
@@ -42,7 +37,6 @@ const Register = () => {
       }, 2000);
     }
 
-    // Reset state before re-load to cleanse out state and ensure proper new state shows up
     dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
@@ -63,7 +57,6 @@ const Register = () => {
         password,
         age,
       };
-      // Register user with needed user data (see register API and also register slice)
       dispatch(register(user));
     }
   };

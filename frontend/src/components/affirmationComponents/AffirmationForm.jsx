@@ -22,7 +22,7 @@ const AffirmationForm = () => {
     }
 
     const affirmationPayload = { affirmation, currentMood };
-    dispatch(createAffirmation(affirmationPayload)); // dispatch create affirmation
+    dispatch(createAffirmation(affirmationPayload));
 
     if (isSuccess) {
       toast.success('Affirmation created!');

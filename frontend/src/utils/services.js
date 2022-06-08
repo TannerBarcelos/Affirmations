@@ -9,7 +9,7 @@ const services = {
     register: async (user) => {
       const { data } = await axios.post(`${API_URL}${usersAPI}/register`, user);
       if (data) {
-        localStorage.setItem('user', JSON.stringify(data)); // Store user that comes back from this endpoint in localStorage (also contains JWT which is a must)
+        localStorage.setItem('user', JSON.stringify(data));
       }
       return data;
     },
@@ -28,14 +28,14 @@ const services = {
     create: async (affirmation, token) => {
       const options = {
         headers: {
-          Authorization: `Bearer ${token}`, // the format we receive the auth token as in the server
+          Authorization: `Bearer ${token}`,
         },
       };
       const { data } = await axios.post(
         `${API_URL}${affirmationsAPI}/create`,
         affirmation,
         options,
-      ); // returns created affirmation
+      );
       return data;
     },
     delete: async (id, token) => {
@@ -45,9 +45,9 @@ const services = {
         },
       };
       const { data } = await axios.delete(
-        `${API_URL}${affirmationsAPI}/delete/${id}`, // the api is /api/v1/delete/:id
+        `${API_URL}${affirmationsAPI}/delete/${id}`,
         options,
-      ); //returns delete affirmations ID (_id: sign)
+      );
       return data;
     },
     getAll: async (token) => {
@@ -59,7 +59,7 @@ const services = {
       const { data } = await axios.get(
         `${API_URL}${affirmationsAPI}/getAll`,
         options,
-      ); // returns created affirmation
+      );
       return data;
     },
   },

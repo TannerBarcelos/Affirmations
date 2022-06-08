@@ -31,7 +31,7 @@ const Login = () => {
         navigate('/dashboard');
       }, 2000);
     }
-    // cleanup on un-mount
+
     return () => {
       dispatch(reset());
     };

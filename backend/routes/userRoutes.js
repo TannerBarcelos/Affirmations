@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const protect = require('../middlewares/authMiddleware');
+const protectRoute = require('../middlewares/authMiddleware');
 
 const {
   registerUser,
@@ -10,6 +10,6 @@ const {
 
 router.post('/register', registerUser);
 router.post('/login', loginUser);
-router.get('/me', protect, getUser); // <- authorized route - it is protected by the auth middleware that checks for token
+router.get('/me', protectRoute, getUser);
 
 module.exports = router;

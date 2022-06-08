@@ -12,26 +12,20 @@ const generateToken = require('../config/generateToken');
 const registerUser = asyncHandler(async (request, response) => {
   const { name, email, password, age } = request.body;
 
-  // Check if all fields were entered
   if (!name || !email || !password || !age) {
     response.status(400);
     throw new Error('You must enter a name, email, password and your age');
   }
 
-  // If entered, check if this user exists in the DB - if they do, then they need to login NOT register
   const user = await User.findOne({ email });
   if (user) {
     response.status(400);
     throw new Error('User with this email already exists. Please log in.');
   }
 
-  // If they do no exist, then we can start the creation process.
-  // Step 1 - Salt password (encryption process)
   const pwdSalt = await bcrypt.genSalt(12);
-  // Step 2 - Hash the password using the salt
   const hashedPWD = await bcrypt.hash(password, pwdSalt);
-  // Step 3 - Create the user (ensure you pass the hashedPassword for password field - NEVER STORE PLAIN TEXT PASSWORDS IN A DD)
-  // and also the JWT to use for authorization
+
   const newUser = await User.create({
     name,
     email,
@@ -39,11 +33,10 @@ const registerUser = asyncHandler(async (request, response) => {
     password: hashedPWD,
   });
 
-  // If this was successfull, respond with success / created and the jwt
   if (newUser) {
     response.status(201);
     response.json({
-      _id: newUser.id, // return as _id since this is the syntax MongoDB uses and once in client, this make it easy to differentiate
+      _id: newUser.id,
       age,
       email,
       token: generateToken(newUser.id),
@@ -60,20 +53,18 @@ const registerUser = asyncHandler(async (request, response) => {
 const loginUser = asyncHandler(async (request, response) => {
   const { email, password } = request.body;
 
-  // Check if all fields were entered
   if (!email || !password) {
     response.status(400);
     throw new Error('You must enter an email and password to login');
   }
 
-  // If entered, check if this user exists and compare the entered password to the hashed password if this user exists (hence the logical &&)
   const user = await User.findOne({ email });
   if (user && (await bcrypt.compare(password, user.password))) {
     response.json({
       _id: user.id,
       email: user.email,
       name: user.name,
-      token: generateToken(user.id), // return the JWT which is our auth token!
+      token: generateToken(user.id),
     });
   } else {
     response.status(400);
@@ -88,11 +79,6 @@ const loginUser = asyncHandler(async (request, response) => {
  * @param {*} response - express response object
  * @access Private
  */
-// Pull out user data from request object and return it
-// (it exists because in order to access this, the auth middleware we created will decode
-// the attached JWT in the Bearer auth header and pull out the encoded user ID we used when generating the JWT payload. Given it passes
-// we do a DB query via the ID and find the user attached. Once found, we get all that users data and attach it to an object called
-// 'user' [self named / created] and it is accessible easily like plain JS in this route. Super cool!)
 const getUser = asyncHandler(async (request, response) => {
   response.status(200);
   response.json(request.user);
