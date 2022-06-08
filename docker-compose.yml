@@ -7,17 +7,17 @@ services:
     ports:
       - '80:80'
     image: 'tannermbarcelos/affirmations-nginx'
-  backend:
+  server:
     image: 'tannermbarcelos/affirmations-server'
     mem_limit: 128m
-    hostname: backend
+    hostname: server
     environment:
       - VERSION=$VERSION
       - MONGO_URI=$MONGO_URI
       - JWT_SECRET=$JWT_SECRET
       - NODE_DOCKER_PORT=$PORT
       - NODE_ENV=$NODE_ENV
-  frontend:
+  client:
     mem_limit: 128m
-    hostname: frontend
+    hostname: client
     image: 'tannermbarcelos/affirmations-client'
