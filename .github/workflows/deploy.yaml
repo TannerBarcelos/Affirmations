@@ -13,18 +13,18 @@ jobs:
       # Login to Docker hub and then perform tests
       - uses: actions/checkout@v2
       - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-      # - run: docker build -t tannermbarcelos/react-test -f ./frontend/Dockerfile.dev ./frontend
-      # - run: docker run -e CI=true tannermbarcelos/react-tests npm test
+      # - run: docker build -t tannermbarcelos/client-test -f ./frontend/Dockerfile.dev ./frontend
+      # - run: docker run -e CI=true tannermbarcelos/client-test npm test
 
       # Build the Production Docker Images
-      - run: docker build -t tannermbarcelos/affirmations-frontend ./frontend
+      - run: docker build -t tannermbarcelos/affirmations-client ./frontend
       - run: docker build -t tannermbarcelos/affirmations-nginx ./nginx
-      - run: docker build -t tannermbarcelos/affirmations-nodeapp ./backend
+      - run: docker build -t tannermbarcelos/affirmations-server ./backend
 
-      # Push those new Production Docker Images to DockerHub
-      - run: docker push tannermbarcelos/affirmations-frontend
+      # Push those new Production Docker Images to DockerHub - These will be pulled down in prod docker-compose in AWS to build app
+      - run: docker push tannermbarcelos/affirmations-client
       - run: docker push tannermbarcelos/affirmations-nginx
-      - run: docker push tannermbarcelos/affirmations-nodeapp
+      - run: docker push tannermbarcelos/affirmations-server
 
       # Zip up contents of app to be deployed into EB
       - name: Zip and Generate deployment package

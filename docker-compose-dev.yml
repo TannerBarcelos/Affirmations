@@ -14,7 +14,7 @@ services:
     ports:
       - '80:80'
   backend:
-    container_name: 'backend'
+    container_name: 'server'
     build:
       dockerfile: Dockerfile.dev
       context: './backend'
@@ -26,7 +26,7 @@ services:
     env_file:
       - .env
   frontend:
-    container_name: 'frontend'
+    container_name: 'client'
     stdin_open: true
     restart: 'no'
     environment:

@@ -1,4 +1,4 @@
-## Affirmation
+## Affirmations
 
 ### Deploy Status
 

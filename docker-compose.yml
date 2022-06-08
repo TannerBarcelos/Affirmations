@@ -8,7 +8,7 @@ services:
       - '80:80'
     image: 'tannermbarcelos/affirmations-nginx'
   backend:
-    image: 'tannermbarcelos/affirmations-nodeapp'
+    image: 'tannermbarcelos/affirmations-server'
     mem_limit: 128m
     hostname: backend
     environment:
@@ -20,4 +20,4 @@ services:
   frontend:
     mem_limit: 128m
     hostname: frontend
-    image: 'tannermbarcelos/affirmations-frontend'
+    image: 'tannermbarcelos/affirmations-client'

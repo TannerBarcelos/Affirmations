@@ -1,18 +1,14 @@
 build-node-image:
-	cd backend && docker build -t node-api -f Dockerfile.dev .
+	cd backend && docker build -t backend -f Dockerfile.dev .
 run-node-image:
-	cd backend && docker run --name node-backend -p 4000:4000 -v /app/node_modules -v $(shell pwd):/app --env-file .env node-api
-
-
+	cd backend && docker run --name api-server -p 4000:4000 -v /app/node_modules -v $(shell pwd):/app --env-file .env backend
 build-client-image:
 	cd frontend && docker build -t react-app -f Dockerfile.dev .
 run-client-image:
-	docker run --name react-client -p 3000:3000 -v /app/node_modules -v $(shell cd frontend && pwd):/app --env-file .env react-app
-
-
-up-build:
-	docker compose -f docker-compose-dev.yml up --build
-up-dev:
-	docker compose -f docker-compose-dev.yml up
-down-dev:
-	docker compose -f docker-compose-dev.yml down
+	docker run --name client -p 3000:3000 -v /app/node_modules -v $(shell cd frontend && pwd):/app --env-file .env react-app
+compose-up-build:
+	docker-compose -f docker-compose-dev.yml up --build
+compose-up-dev:
+	docker-compose -f docker-compose-dev.yml up
+compose-down-dev:
+	docker-compose -f docker-compose-dev.yml down

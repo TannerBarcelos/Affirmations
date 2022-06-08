@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
 
-const generateToken = (userID) => {
-  return jwt.sign({ id: userID }, process.env.JWT_SECRET, {
+// Takes in userID of the user created / found in Mongo Lookup
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: '30d',
   });
 };
