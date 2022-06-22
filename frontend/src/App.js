@@ -9,7 +9,6 @@ import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 import Settings from './pages/Settings.jsx';
 
-// Component Imports
 import Header from './components/header/Header.jsx';
 
 function App() {
