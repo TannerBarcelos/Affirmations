@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import moodIcons from '../../assets/icons/moodIcons';
 import { createAffirmation } from '../../features/affirmations/affirmationSlice';
@@ -42,7 +42,6 @@ const AffirmationForm = () => {
       <form onSubmit={onSubmit}>
         <div className='form-group affirmation-box'>
           <input
-            autoFocus
             type='text'
             name='affirmation'
             id='affirmation-input'

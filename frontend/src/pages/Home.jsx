@@ -1,3 +1,4 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import mental from '../assets/icons/mental.svg';
 import click from '../assets/icons/click.svg';
