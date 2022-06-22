@@ -42,7 +42,6 @@ const AffirmationForm = () => {
       <form onSubmit={onSubmit}>
         <div className='form-group affirmation-box'>
           <input
-            autoFocus
             type='text'
             name='affirmation'
             id='affirmation-input'
