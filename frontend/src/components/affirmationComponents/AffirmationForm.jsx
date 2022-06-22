@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import moodIcons from '../../assets/icons/moodIcons';
 import { createAffirmation } from '../../features/affirmations/affirmationSlice';
