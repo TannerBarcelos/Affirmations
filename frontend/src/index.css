@@ -115,7 +115,7 @@
   align-items: center;
   max-width: 700px;
   min-height: 30vh;
-  margin: 4rem auto;
+  margin: 10rem auto;
   background-color: var(--secondary-color-opaque);
   border-radius: var(--radius);
 }
