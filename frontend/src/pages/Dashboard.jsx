@@ -94,10 +94,10 @@ const Dashboard = () => {
               }}
             ></i>
             <span
-              style={{ position: 'absolute', right: '1rem' }}
+              style={{ position: 'absolute', right: '1rem', fontSize: '.7rem' }}
               title='Affirmation created'
             >
-              {generateDate(createdAt)}
+              Created {generateDate(createdAt)}
             </span>
           </div>
         </div>

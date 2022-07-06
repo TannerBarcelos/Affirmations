@@ -43,11 +43,12 @@ const EditAffirmationModal = ({
     }
 
     const affirmationPayload = {
+      _id,
       affirmation: newAffirmation,
       endMood: newMood,
     };
 
-    dispatch(updateAffirmation(_id, affirmationPayload));
+    dispatch(updateAffirmation(affirmationPayload));
 
     if (isSuccess) {
       toast.success('Affirmation Edited!');
@@ -93,12 +94,19 @@ const EditAffirmationModal = ({
                 ></i>
               );
             })}
-            {oldMood && <span>Your starting mood was {oldMood}</span>}
           </div>
           <div className='form-group'>
             <button type='submit' className='btn'>
               Update
             </button>
+            {oldMood && (
+              <span
+                className='prompt'
+                style={{ display: 'block', paddingTop: '1rem' }}
+              >
+                Your starting mood was {oldMood}
+              </span>
+            )}
           </div>
         </form>
       </section>

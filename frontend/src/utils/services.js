@@ -68,7 +68,7 @@ const services = {
           Authorization: `Bearer ${token}`,
         },
       };
-      const { data } = await axios.post(
+      const { data } = await axios.put(
         `${API_URL}${affirmationsAPI}/edit/${id}`,
         affirmation,
         options,

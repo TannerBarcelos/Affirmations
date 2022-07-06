@@ -65,10 +65,14 @@ export const deleteAffirmation = createAsyncThunk(
 
 export const updateAffirmation = createAsyncThunk(
   'affirmations/update',
-  async (id, affirmation, thunkAPI) => {
+  async (affirmation, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await services.affirmations.update(id, affirmation, token);
+      return await services.affirmations.update(
+        affirmation._id,
+        affirmation,
+        token,
+      );
     } catch (error) {
       const message =
         (error.response &&
