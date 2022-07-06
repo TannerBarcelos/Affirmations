@@ -20,7 +20,7 @@ const getAllAffirmations = asyncHandler(async (request, response) => {
 const getSingleAffirmation = asyncHandler(async (request, response) => {
   const { id } = request.params;
   const affirmation = await affirmationModel.findById(id);
-
+  const user = request.user; // will always exist because the middleware will either set the user on the request object or redirect
   if (!affirmation) {
     response.status(400);
     throw new Error('This affirmation does not exist');
