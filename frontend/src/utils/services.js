@@ -62,6 +62,19 @@ const services = {
       );
       return data;
     },
+    update: async (id, affirmation, token) => {
+      const options = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const { data } = await axios.put(
+        `${API_URL}${affirmationsAPI}/edit/${id}`,
+        affirmation,
+        options,
+      );
+      return data;
+    },
   },
 };
 

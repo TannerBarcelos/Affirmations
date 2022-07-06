@@ -64,7 +64,7 @@ const createAffirmation = asyncHandler(async (request, response) => {
  */
 const updateAffirmation = asyncHandler(async (request, response) => {
   const { id } = request.params;
-  const { mood, affirmation } = request.body;
+  const { endMood, affirmation } = request.body;
   const user = request.user;
 
   const affirm = await affirmationModel.findById(id);
@@ -80,7 +80,7 @@ const updateAffirmation = asyncHandler(async (request, response) => {
   const updatedAffirmation = await affirmationModel.findByIdAndUpdate(
     id,
     {
-      mood,
+      endMood,
       affirmation,
     },
     { new: true },
