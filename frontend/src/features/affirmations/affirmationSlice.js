@@ -63,6 +63,24 @@ export const deleteAffirmation = createAsyncThunk(
   },
 );
 
+export const updateAffirmation = createAsyncThunk(
+  'affirmations/update',
+  async (id, affirmation, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await services.affirmations.update(id, affirmation, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  },
+);
+
 export const affirmationSlice = createSlice({
   name: 'affirmation',
   initialState,
@@ -81,6 +99,26 @@ export const affirmationSlice = createSlice({
         state.affirmations.push(action.payload);
       })
       .addCase(createAffirmation.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = true;
+        state.message = action.payload;
+      })
+      .addCase(updateAffirmation.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateAffirmation.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.affirmations = state.affirmations.map((aff) => {
+          if (aff._id === action.payload._id) {
+            return action.payload;
+          }
+          return aff;
+        });
+      })
+      .addCase(updateAffirmation.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = true;

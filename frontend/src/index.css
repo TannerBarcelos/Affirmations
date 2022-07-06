@@ -476,6 +476,15 @@
   height: 2.8rem;
 }
 
+.modal {
+  width: 600px;
+  background-color: red;
+  position: absolute;
+  top: 50%;
+  transform: translate(50%, -50%);
+  z-index: 10000;
+}
+
 /*****************************************/
 @media screen and (min-width: 600px) {
   .nav-item-link:hover {

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import moodIcons from '../assets/icons/moodIcons';
@@ -15,10 +15,14 @@ import ClipLoader from 'react-spinners/ClipLoader';
 
 // Component Import
 import AffirmationForm from '../components/affirmationComponents/AffirmationForm.jsx';
+import EditAffirmationModal from '../components/affirmationComponents/EditAffirmationModal';
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [editableAffirmation, setEditableAffirmation] = useState({});
 
   // Pull out global state
   const { user } = useSelector((state) => state.auth);
@@ -26,7 +30,6 @@ const Dashboard = () => {
     (state) => state.affirmations,
   );
 
-  // If user is not logged in, redirect to login page
   useEffect(() => {
     if (isError) {
       toast.error(message);
@@ -68,7 +71,6 @@ const Dashboard = () => {
               ></i>
               {endMood ? (
                 <>
-                  {/* Title attribute will give a little visual feedback tooltip on what the icon is */}
                   <i
                     className={`${moodIcon} end-mood-icon ${startMood}`}
                     title='Affirmations ending mood'
@@ -78,17 +80,18 @@ const Dashboard = () => {
             </div>
           </div>
           <div className='update-box'>
-            {/* ADD EDIT FUNCTIONALITY IN V2
-            <i
-              className='fa-solid fa-pen-to-square'
-              title='Update this Affirmation'
-            ></i> */}
             <i
               className='fa-solid fa-trash'
               title='Delete this Affirmation'
-              onClick={(e) =>
-                dispatch(deleteAffirmation(affirm))
-              } /* pass whole affirmation to the delete action  */
+              onClick={(e) => dispatch(deleteAffirmation(affirm))}
+            ></i>
+            <i
+              className='fa-solid fa-pen-to-square'
+              title='Update this Affirmation'
+              onClick={(e) => {
+                setModalIsOpen(!modalIsOpen);
+                setEditableAffirmation(affirm);
+              }}
             ></i>
             <span
               style={{ position: 'absolute', right: '1rem' }}
@@ -102,7 +105,21 @@ const Dashboard = () => {
     });
   };
 
-  // console.log(affirmations);
+  const closeModal = () => {
+    setModalIsOpen(!modalIsOpen);
+  };
+
+  const renderModal = () => {
+    return (
+      <EditAffirmationModal
+        editableAffirmation={editableAffirmation}
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel={'Edit Affirmation'}
+      />
+    );
+  };
+
   return (
     <div className='container'>
       <section className='dashboard-heading'>
@@ -119,9 +136,12 @@ const Dashboard = () => {
           <p>Go ahead and create one above!</p>
         </div>
       ) : (
-        <section className='dashboard-affirmations-container'>
-          {renderAffirmations()}
-        </section>
+        <>
+          {modalIsOpen && renderModal()}
+          <section className='dashboard-affirmations-container'>
+            {renderAffirmations()}
+          </section>
+        </>
       )}
     </div>
   );
