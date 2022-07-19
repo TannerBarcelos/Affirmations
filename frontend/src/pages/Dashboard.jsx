@@ -5,7 +5,7 @@ import {
   getAffirmations,
   metaSelector,
   reset,
-  selectAffirmations,
+  selectEntities,
 } from '../features/affirmations/affirmationSlice';
 import { toast } from 'react-toastify';
 import ClipLoader from 'react-spinners/ClipLoader';
@@ -28,7 +28,7 @@ const Dashboard = () => {
 
   const { isError, isLoading, message } = useSelector(metaSelector);
 
-  const affirmationIds = useSelector(selectAffirmations);
+  const affirmationEntityIds = useSelector(selectEntities);
 
   useEffect(() => {
     if (isError) {
@@ -59,7 +59,7 @@ const Dashboard = () => {
      *
      * For all future projects Normalized state, memoized selectors and mapping over IDs and getting items by IDs via getSelectors() should be used
      */
-    return affirmationIds.map((id) => (
+    return affirmationEntityIds.map((id) => (
       <AffirmationItem
         key={id}
         affirmationId={id}
@@ -95,7 +95,7 @@ const Dashboard = () => {
         <div className='loading-affirmations'>
           <ClipLoader />
         </div>
-      ) : affirmationIds.length === 0 ? (
+      ) : affirmationEntityIds.length === 0 ? (
         <div className='no-affirmations'>
           <h4>No Affirmations</h4>
           <p>Go ahead and create one above!</p>

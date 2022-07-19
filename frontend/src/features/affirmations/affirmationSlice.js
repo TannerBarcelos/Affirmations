@@ -76,8 +76,9 @@ export const updateAffirmation = createAsyncThunk(
   async (affirmation, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
+      console.log(affirmation);
       return await Services.affirmations.update(
-        affirmation._id,
+        affirmation.id,
         affirmation,
         token,
       );
@@ -108,11 +109,7 @@ export const affirmationSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        const newAffirmation = {
-          ...action.payload,
-          id: action.payload._id,
-        };
-        affirmationsAdapter.addOne(state, newAffirmation);
+        affirmationsAdapter.addOne(state, action.payload);
       })
       .addCase(createAffirmation.rejected, (state, action) => {
         state.isLoading = false;
@@ -127,11 +124,7 @@ export const affirmationSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        const updatedAffirmation = {
-          ...action.payload,
-          id: action.payload._id,
-        };
-        affirmationsAdapter.upsertOne(state, updatedAffirmation);
+        affirmationsAdapter.upsertOne(state, action.payload);
       })
       .addCase(updateAffirmation.rejected, (state, action) => {
         state.isLoading = false;
@@ -146,7 +139,7 @@ export const affirmationSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        affirmationsAdapter.removeOne(state, action.payload._id);
+        affirmationsAdapter.removeOne(state, action.payload.id);
       })
       .addCase(deleteAffirmation.rejected, (state, action) => {
         state.isLoading = false;
@@ -161,13 +154,7 @@ export const affirmationSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        const adjustedAffirmations = action.payload.map((action) => {
-          return {
-            ...action,
-            id: action._id,
-          };
-        });
-        affirmationsAdapter.setAll(state, adjustedAffirmations);
+        affirmationsAdapter.setAll(state, action.payload);
       })
       .addCase(getAffirmations.rejected, (state, action) => {
         state.isLoading = false;
@@ -180,22 +167,18 @@ export const affirmationSlice = createSlice({
 
 // getSelectors returns 5 selectors (selectAll, selectById, selectTotal, selectEntities, selectIds)
 // Note that this only works on stores that are normalized. In normalized state, we work with ids and entities to do a table lookup rather than using arrays
-// of objects, etc.
+// of objects, etc. See here https://redux.js.org/tutorials/fundamentals/part-8-modern-redux#normalizing-state
 export const {
-  selectAll: selectEntityIds,
+  selectAll: selectAllEntities,
   selectById: selectEntityById,
 } = affirmationsAdapter.getSelectors((state) => state.affirmations);
 
 // Memoize selector - memoize selecting all entity IDs
-export const selectAffirmations = createSelector(selectEntityIds, (entities) =>
+export const selectEntities = createSelector(selectAllEntities, (entities) =>
   entities.map((entity) => entity.id),
 );
 
-// Common practice to create our selectors in the slice and then import them
-// where needed and use useSelector(). Meta data stuff (loading, error, message)
-// do not need to be memoriezed however things that do not change often like
-// affirmations list (can change but a lot of times it is more of consumption - read heavy)
-// we can memoize the selector that way it can instantl return the data rather than re-select it all and cause re-renders
+// Common practice to create our selectors in the slice and then export them to be imported into useSelector where needed
 export const metaSelector = (state) => state.affirmations;
 
 export const { reset } = affirmationSlice.actions;

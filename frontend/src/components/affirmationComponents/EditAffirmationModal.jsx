@@ -14,7 +14,7 @@ const EditAffirmationModal = ({
   onRequestClose,
   contentLabel,
 }) => {
-  const { _id, affirmation, startMood } = editableAffirmation;
+  const { id, affirmation, startMood } = editableAffirmation;
 
   const [newAffirmation, setNewAffirmation] = useState(affirmation);
   const [oldMood] = useState(startMood);
@@ -45,7 +45,7 @@ const EditAffirmationModal = ({
     }
 
     const affirmationPayload = {
-      _id,
+      id,
       affirmation: newAffirmation,
       endMood: newMood,
     };

@@ -19,7 +19,7 @@ export const AffirmationItem = ({
   // Get this affirmation from the entities object in our affirmations state
   const aff = useSelector((state) => selectEntityById(state, affirmationId));
 
-  const { _id, affirmation, startMood, endMood, createdAt, updatedAt } = aff;
+  const { id, affirmation, startMood, endMood, createdAt, updatedAt } = aff;
 
   const moodIcon = moodIcons[startMood];
   return (
@@ -53,7 +53,7 @@ export const AffirmationItem = ({
         <i
           className='fa-solid fa-trash'
           title='Delete this Affirmation'
-          onClick={(e) => dispatch(deleteAffirmation(_id))}
+          onClick={(e) => dispatch(deleteAffirmation(id))}
         ></i>
         <i
           className='fa-solid fa-pen-to-square'
