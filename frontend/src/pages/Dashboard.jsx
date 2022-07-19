@@ -12,6 +12,7 @@ import ClipLoader from 'react-spinners/ClipLoader';
 import AffirmationForm from '../components/affirmationComponents/AffirmationForm.jsx';
 import EditAffirmationModal from '../components/affirmationComponents/EditAffirmationModal';
 import { AffirmationItem } from '../components/affirmationComponents/AffirmationItem.jsx';
+import { userAuth } from '../features/auth/authSlice';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -21,7 +22,10 @@ const Dashboard = () => {
   const [editableAffirmation, setEditableAffirmation] = useState({});
 
   // Pull out global state
-  const { user } = useSelector((state) => state.auth);
+  const auth = useSelector(userAuth);
+
+  const { user } = auth;
+
   const { isError, isLoading, message } = useSelector(metaSelector);
 
   const affirmationIds = useSelector(selectAffirmations);
@@ -39,7 +43,7 @@ const Dashboard = () => {
     return () => {
       dispatch(reset());
     };
-  }, [user, navigate, isError, message, dispatch]);
+  }, [isError, message]);
 
   const renderAffirmations = () => {
     /**

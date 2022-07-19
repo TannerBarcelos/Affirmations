@@ -4,7 +4,7 @@ import moodIcons from '../../assets/icons/moodIcons';
 import affirmationImages from '../../assets/images/affirmationImages';
 import {
   deleteAffirmation,
-  selectAffirmationById,
+  selectEntityById,
 } from '../../features/affirmations/affirmationSlice';
 import { generateDate } from '../../utils/helpers';
 
@@ -17,9 +17,7 @@ export const AffirmationItem = ({
   const dispatch = useDispatch();
 
   // Get this affirmation from the entities object in our affirmations state
-  const aff = useSelector((state) =>
-    selectAffirmationById(state, affirmationId),
-  );
+  const aff = useSelector((state) => selectEntityById(state, affirmationId));
 
   const { _id, affirmation, startMood, endMood, createdAt, updatedAt } = aff;
 
@@ -69,7 +67,7 @@ export const AffirmationItem = ({
           style={{ position: 'absolute', right: '1rem', fontSize: '.7rem' }}
           title='Affirmation created'
         >
-          Created {generateDate(createdAt)}
+          {generateDate(createdAt)}
         </span>
       </div>
     </div>

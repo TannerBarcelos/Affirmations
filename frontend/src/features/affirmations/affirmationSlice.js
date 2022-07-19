@@ -7,6 +7,7 @@ import {
 
 import Services from '../../utils/Services';
 
+// Normalizing state - use entity adapater. Now every state interaction, update etc. will be done via entity ids
 const affirmationsAdapter = createEntityAdapter();
 
 const initialState = affirmationsAdapter.getInitialState({
@@ -93,10 +94,10 @@ export const updateAffirmation = createAsyncThunk(
 );
 
 export const affirmationSlice = createSlice({
-  name: 'affirmation',
+  name: 'affirmations',
   initialState,
   reducers: {
-    reset: (state) => initialState,
+    reset: (_) => initialState,
   },
   extraReducers: (builder) => {
     builder
@@ -181,14 +182,13 @@ export const affirmationSlice = createSlice({
 // Note that this only works on stores that are normalized. In normalized state, we work with ids and entities to do a table lookup rather than using arrays
 // of objects, etc.
 export const {
-  selectAll: selectAffirmationIds, // get all affirmation ids - use to map over and render entity via getById selector function
-  selectById: selectAffirmationById, // get single affirmation
+  selectAll: selectEntityIds,
+  selectById: selectEntityById,
 } = affirmationsAdapter.getSelectors((state) => state.affirmations);
 
-// Memoize selector of all affirmations - selectAffirmationIds
-export const selectAffirmations = createSelector(
-  selectAffirmationIds,
-  (affirmations) => affirmations.map((affirmation) => affirmation.id),
+// Memoize selector - memoize selecting all entity IDs
+export const selectAffirmations = createSelector(selectEntityIds, (entities) =>
+  entities.map((entity) => entity.id),
 );
 
 // Common practice to create our selectors in the slice and then import them

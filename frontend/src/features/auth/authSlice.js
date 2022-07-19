@@ -90,5 +90,9 @@ export const authSlice = createSlice({
       });
   },
 });
+
+// Selectors - no normalized state for auth so straight forward
+export const userAuth = (state) => state.auth;
+
 export const { reset } = authSlice.actions;
 export default authSlice.reducer;
