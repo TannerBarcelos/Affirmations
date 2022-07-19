@@ -1,20 +1,27 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import services from '../../utils/services';
+import {
+  createSlice,
+  createAsyncThunk,
+  createEntityAdapter,
+  createSelector,
+} from '@reduxjs/toolkit';
 
-const initialState = {
-  affirmations: [],
+import Services from '../../utils/Services';
+
+const affirmationsAdapter = createEntityAdapter();
+
+const initialState = affirmationsAdapter.getInitialState({
   isError: false,
   isSuccess: false,
   isLoading: false,
   message: '',
-};
+});
 
 export const createAffirmation = createAsyncThunk(
   'affirmations/create',
   async (affirmation, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await services.affirmations.create(affirmation, token);
+      return await Services.affirmations.create(affirmation, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -32,7 +39,7 @@ export const getAffirmations = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await services.affirmations.getAll(token);
+      return await Services.affirmations.getAll(token);
     } catch (error) {
       const message =
         (error.response &&
@@ -47,10 +54,10 @@ export const getAffirmations = createAsyncThunk(
 
 export const deleteAffirmation = createAsyncThunk(
   'affirmations/delete',
-  async (affirmation, thunkAPI) => {
+  async (id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await services.affirmations.delete(affirmation._id, token);
+      return await Services.affirmations.delete(id, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -68,7 +75,7 @@ export const updateAffirmation = createAsyncThunk(
   async (affirmation, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await services.affirmations.update(
+      return await Services.affirmations.update(
         affirmation._id,
         affirmation,
         token,
@@ -100,7 +107,11 @@ export const affirmationSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.affirmations.push(action.payload);
+        const newAffirmation = {
+          ...action.payload,
+          id: action.payload._id,
+        };
+        affirmationsAdapter.addOne(state, newAffirmation);
       })
       .addCase(createAffirmation.rejected, (state, action) => {
         state.isLoading = false;
@@ -115,12 +126,11 @@ export const affirmationSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.affirmations = state.affirmations.map((aff) => {
-          if (aff._id === action.payload._id) {
-            return action.payload;
-          }
-          return aff;
-        });
+        const updatedAffirmation = {
+          ...action.payload,
+          id: action.payload._id,
+        };
+        affirmationsAdapter.upsertOne(state, updatedAffirmation);
       })
       .addCase(updateAffirmation.rejected, (state, action) => {
         state.isLoading = false;
@@ -135,9 +145,7 @@ export const affirmationSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.affirmations = state.affirmations.filter(
-          (aff) => aff._id !== action.payload._id,
-        );
+        affirmationsAdapter.removeOne(state, action.payload._id);
       })
       .addCase(deleteAffirmation.rejected, (state, action) => {
         state.isLoading = false;
@@ -152,7 +160,13 @@ export const affirmationSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.affirmations = action.payload;
+        const adjustedAffirmations = action.payload.map((action) => {
+          return {
+            ...action,
+            id: action._id,
+          };
+        });
+        affirmationsAdapter.setAll(state, adjustedAffirmations);
       })
       .addCase(getAffirmations.rejected, (state, action) => {
         state.isLoading = false;
@@ -162,6 +176,27 @@ export const affirmationSlice = createSlice({
       });
   },
 });
+
+// getSelectors returns 5 selectors (selectAll, selectById, selectTotal, selectEntities, selectIds)
+// Note that this only works on stores that are normalized. In normalized state, we work with ids and entities to do a table lookup rather than using arrays
+// of objects, etc.
+export const {
+  selectAll: selectAffirmationIds, // get all affirmation ids - use to map over and render entity via getById selector function
+  selectById: selectAffirmationById, // get single affirmation
+} = affirmationsAdapter.getSelectors((state) => state.affirmations);
+
+// Memoize selector of all affirmations - selectAffirmationIds
+export const selectAffirmations = createSelector(
+  selectAffirmationIds,
+  (affirmations) => affirmations.map((affirmation) => affirmation.id),
+);
+
+// Common practice to create our selectors in the slice and then import them
+// where needed and use useSelector(). Meta data stuff (loading, error, message)
+// do not need to be memoriezed however things that do not change often like
+// affirmations list (can change but a lot of times it is more of consumption - read heavy)
+// we can memoize the selector that way it can instantl return the data rather than re-select it all and cause re-renders
+export const metaSelector = (state) => state.affirmations;
 
 export const { reset } = affirmationSlice.actions;
 export default affirmationSlice.reducer;
