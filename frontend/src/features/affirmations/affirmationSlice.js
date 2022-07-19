@@ -5,7 +5,7 @@ import {
   createSelector,
 } from '@reduxjs/toolkit';
 
-import Services from '../../utils/Services';
+import { Services } from '../../utils/Services';
 
 // Normalizing state - use entity adapater. Now every state interaction, update etc. will be done via entity ids
 const affirmationsAdapter = createEntityAdapter();
