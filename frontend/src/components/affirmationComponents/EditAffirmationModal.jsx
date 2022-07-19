@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import moodIcons from '../../assets/icons/moodIcons';
-import { updateAffirmation } from '../../features/affirmations/affirmationSlice';
+import {
+  metaSelector,
+  updateAffirmation,
+} from '../../features/affirmations/affirmationSlice';
 import { toast } from 'react-toastify';
 import Modal from 'react-modal';
 
@@ -11,15 +14,14 @@ const EditAffirmationModal = ({
   onRequestClose,
   contentLabel,
 }) => {
-  const { _id, affirmation, startMood } = editableAffirmation;
+  const { id, affirmation, startMood } = editableAffirmation;
+
   const [newAffirmation, setNewAffirmation] = useState(affirmation);
   const [oldMood] = useState(startMood);
   const [newMood, setNewMood] = useState('');
 
   const dispatch = useDispatch();
-  const { isError, isSuccess, message } = useSelector(
-    (state) => state.affirmations,
-  );
+  const { isError, isSuccess, message } = useSelector(metaSelector);
 
   const customStyles = {
     content: {
@@ -43,7 +45,7 @@ const EditAffirmationModal = ({
     }
 
     const affirmationPayload = {
-      _id,
+      id,
       affirmation: newAffirmation,
       endMood: newMood,
     };

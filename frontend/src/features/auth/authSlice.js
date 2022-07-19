@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import services from '../../utils/services';
+import Services from '../../utils/Services';
 
 const user = JSON.parse(localStorage.getItem('user'));
 
@@ -15,7 +15,7 @@ export const register = createAsyncThunk(
   'auth/register',
   async (user, thunkAPI) => {
     try {
-      return await services.auth.register(user);
+      return await Services.auth.register(user);
     } catch (error) {
       const message =
         (error.response &&
@@ -30,7 +30,7 @@ export const register = createAsyncThunk(
 
 export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
   try {
-    return await services.auth.login(user);
+    return await Services.auth.login(user);
   } catch (error) {
     const message =
       (error.response && error.response.data && error.response.data.message) ||
@@ -41,7 +41,7 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
 });
 
 export const logout = createAsyncThunk('auth/logout', async () => {
-  await services.auth.logout();
+  await Services.auth.logout();
 });
 
 export const authSlice = createSlice({
@@ -90,5 +90,9 @@ export const authSlice = createSlice({
       });
   },
 });
+
+// Selectors - no normalized state for auth so straight forward
+export const userAuth = (state) => state.auth;
+
 export const { reset } = authSlice.actions;
 export default authSlice.reducer;

@@ -4,7 +4,7 @@ const API_URL = '/api/v1';
 const usersAPI = '/users';
 const affirmationsAPI = '/affirmations';
 
-const services = {
+const Services = {
   auth: {
     register: async (user) => {
       const { data } = await axios.post(`${API_URL}${usersAPI}/register`, user);
@@ -78,4 +78,4 @@ const services = {
   },
 };
 
-export default services;
+export default Services;

@@ -29,7 +29,10 @@ const getSingleAffirmation = asyncHandler(async (request, response) => {
     response.status(401);
     throw new Error('User not authorized');
   }
-  response.status(200).json(affirmation);
+  response.status(200).json({
+    id: affirmation._id,
+    ...affirmation,
+  });
 });
 
 /**
@@ -66,7 +69,6 @@ const updateAffirmation = asyncHandler(async (request, response) => {
   const { id } = request.params;
   const { endMood, affirmation } = request.body;
   const user = request.user;
-
   const affirm = await affirmationModel.findById(id);
 
   if (!affirm) {
@@ -111,7 +113,7 @@ const deleteAffirmation = asyncHandler(async (request, response) => {
   }
 
   await affirmationModel.remove(affirm);
-  response.status(200).json({ _id: id });
+  response.status(200).json({ id });
 });
 
 module.exports = {

@@ -11,7 +11,7 @@ import Settings from './pages/Settings.jsx';
 
 import Header from './components/header/Header.jsx';
 
-function App() {
+const App = () => {
   return (
     <>
       <Router>
@@ -29,6 +29,6 @@ function App() {
       <ToastContainer autoClose={2000} position='top-center' />
     </>
   );
-}
+};
 
 export default App;
