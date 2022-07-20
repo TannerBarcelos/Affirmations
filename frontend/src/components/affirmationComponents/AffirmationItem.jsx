@@ -4,21 +4,16 @@ import moodIcons from '../../assets/icons/moodIcons';
 import affirmationImages from '../../assets/images/affirmationImages';
 import {
   deleteAffirmation,
-  selectEntityById,
+  selectAffirmationEntityById,
 } from '../../features/affirmations/affirmationSlice';
 import { generateDate } from '../../utils/helpers';
 
-export const AffirmationItem = ({
-  affirmationId,
-  setModalIsOpen,
-  isOpen,
-  editable,
-}) => {
+export const AffirmationItem = ({ id, setModalIsOpen, isOpen, editable }) => {
   const dispatch = useDispatch();
 
   // Get this affirmation from the entities object in our affirmations state
   const affirmation = useSelector((state) =>
-    selectEntityById(state, affirmationId),
+    selectAffirmationEntityById(state, id),
   );
 
   const moodIcon = moodIcons[affirmation.startMood];

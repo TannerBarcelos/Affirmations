@@ -169,8 +169,11 @@ export const affirmationSlice = createSlice({
 // Note that this only works on stores that are normalized. In normalized state, we work with ids and entities to do a table lookup rather than using arrays
 // of objects, etc. See here https://redux.js.org/tutorials/fundamentals/part-8-modern-redux#normalizing-state
 export const {
-  selectAll: selectAllEntities,
-  selectById: selectEntityById,
+  selectEntities: affirmationEntities,
+  selectIds: affirmationIds,
+  selectTotal: totalAffirmations, // returns total number of entities in table
+  selectAll: selectAllEntities, // maps over ids array and returns array of the entities in the lookup table found from the ID's in exact same order
+  selectById: selectAffirmationEntityById, // selects a specific entity from the lookup table via the given ID
 } = affirmationsAdapter.getSelectors((state) => state.affirmations);
 
 // Memoize selector - memoize selecting all entity IDs

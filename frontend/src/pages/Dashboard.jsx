@@ -28,7 +28,7 @@ const Dashboard = () => {
 
   const { isError, isLoading, message } = useSelector(metaSelector);
 
-  const affirmationEntityIds = useSelector(selectEntitiesIds);
+  const affirmationIds = useSelector(selectEntitiesIds);
 
   useEffect(() => {
     if (isError) {
@@ -46,23 +46,11 @@ const Dashboard = () => {
   }, [isError, message]);
 
   const renderAffirmations = () => {
-    /**
-     * Note the use of mapping over the IDs. Since we are using normalized state
-     * for one, we want to get all the IDs of our entities and use that as the means of mapping.
-     * From there, we can use another selector 'selectById' or as I renamed it 'selectAffirmationById'
-     * which will look at the entities with the supplied ID and give that result back. THis is how we improve
-     * efficiency but also use normalized state.
-     *
-     * Also, mapping over IDs regardless and rendering a separate component that takes that ID and does a lookup
-     * is far better than just rendering in the map or passing a whole payload in the map to a sub component. The true reasons
-     * can be seen here - https://redux.js.org/tutorials/fundamentals/part-5-ui-react#selecting-data-in-list-items-by-id
-     *
-     * For all future projects Normalized state, memoized selectors and mapping over IDs and getting items by IDs via getSelectors() should be used
-     */
-    return affirmationEntityIds.map((id) => (
+    // Note the use of mapping over the IDs. Since we are using normalized state - see docs
+    return affirmationIds.map((id) => (
       <AffirmationItem
         key={id}
-        affirmationId={id}
+        id={id}
         setModalIsOpen={setModalIsOpen}
         isOpen={modalIsOpen}
         editable={setEditableAffirmation}
@@ -95,7 +83,7 @@ const Dashboard = () => {
         <div className='loading-affirmations'>
           <ClipLoader />
         </div>
-      ) : affirmationEntityIds.length === 0 ? (
+      ) : affirmationIds.length === 0 ? (
         <div className='no-affirmations'>
           <h4>No Affirmations</h4>
           <p>Go ahead and create one above!</p>
