@@ -15,7 +15,7 @@ services:
       - VERSION=$VERSION
       - MONGO_URI=$MONGO_URI
       - JWT_SECRET=$JWT_SECRET
-      - NODE_DOCKER_PORT=$PORT
+      - NODE_DOCKER_PORT=$NODE_DOCKER_PORT
       - NODE_ENV=$NODE_ENV
   client:
     mem_limit: 128m

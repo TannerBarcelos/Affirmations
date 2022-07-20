@@ -7,7 +7,7 @@ import {
 
 import { Services } from '../../utils/Services';
 
-// Normalizing state - use entity adapater. Now every state interaction, update etc. will be done via entity ids
+// Normalizing state
 const affirmationsAdapter = createEntityAdapter();
 
 const initialState = affirmationsAdapter.getInitialState({
@@ -174,7 +174,7 @@ export const {
 } = affirmationsAdapter.getSelectors((state) => state.affirmations);
 
 // Memoize selector - memoize selecting all entity IDs
-export const selectEntities = createSelector(selectAllEntities, (entities) =>
+export const selectEntitiesIds = createSelector(selectAllEntities, (entities) =>
   entities.map((entity) => entity.id),
 );
 

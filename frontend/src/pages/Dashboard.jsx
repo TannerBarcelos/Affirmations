@@ -5,7 +5,7 @@ import {
   getAffirmations,
   metaSelector,
   reset,
-  selectEntities,
+  selectEntitiesIds,
 } from '../features/affirmations/affirmationSlice';
 import { toast } from 'react-toastify';
 import ClipLoader from 'react-spinners/ClipLoader';
@@ -28,7 +28,7 @@ const Dashboard = () => {
 
   const { isError, isLoading, message } = useSelector(metaSelector);
 
-  const affirmationEntityIds = useSelector(selectEntities);
+  const affirmationEntityIds = useSelector(selectEntitiesIds);
 
   useEffect(() => {
     if (isError) {

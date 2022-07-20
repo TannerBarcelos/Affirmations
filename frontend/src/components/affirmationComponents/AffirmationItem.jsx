@@ -17,32 +17,34 @@ export const AffirmationItem = ({
   const dispatch = useDispatch();
 
   // Get this affirmation from the entities object in our affirmations state
-  const aff = useSelector((state) => selectEntityById(state, affirmationId));
+  const affirmation = useSelector((state) =>
+    selectEntityById(state, affirmationId),
+  );
 
-  const { id, affirmation, startMood, endMood, createdAt, updatedAt } = aff;
-
-  const moodIcon = moodIcons[startMood];
+  const moodIcon = moodIcons[affirmation.startMood];
   return (
     <div className='affirmation-card'>
       <div className='image'>
         <img
           src={
-            endMood ? affirmationImages[endMood] : affirmationImages[startMood]
+            endMood
+              ? affirmationImages[affirmation.endMood]
+              : affirmationImages[affirmation.startMood]
           }
           alt='mood-image'
         />
       </div>
       <div className='affirmation'>
-        <h4 className='affirmation-text'>{affirmation}</h4>
+        <h4 className='affirmation-text'>{affirmation.affirmation}</h4>
         <div className='affirmation-moods'>
           <i
-            className={`${moodIcon} start-mood-icon ${startMood}`}
+            className={`${moodIcon} start-mood-icon ${affirmation.startMood}`}
             title='Affirmations starting mood'
           ></i>
           {endMood ? (
             <>
               <i
-                className={`${moodIcon} end-mood-icon ${startMood}`}
+                className={`${moodIcon} end-mood-icon ${affirmation.startMood}`}
                 title='Affirmations ending mood'
               ></i>
             </>
@@ -53,21 +55,21 @@ export const AffirmationItem = ({
         <i
           className='fa-solid fa-trash'
           title='Delete this Affirmation'
-          onClick={(e) => dispatch(deleteAffirmation(id))}
+          onClick={(e) => dispatch(deleteAffirmation(affirmation.id))}
         ></i>
         <i
           className='fa-solid fa-pen-to-square'
           title='Update this Affirmation'
           onClick={(e) => {
             setModalIsOpen(!isOpen);
-            editable(aff);
+            editable(affirmation);
           }}
         ></i>
         <span
           style={{ position: 'absolute', right: '1rem', fontSize: '.7rem' }}
           title='Affirmation created'
         >
-          {generateDate(createdAt)}
+          {generateDate(affirmation.createdAt)}
         </span>
       </div>
     </div>
