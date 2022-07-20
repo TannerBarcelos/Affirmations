@@ -27,9 +27,9 @@ export const AffirmationItem = ({
       <div className='image'>
         <img
           src={
-            endMood
-              ? affirmationImages[affirmation.endMood]
-              : affirmationImages[affirmation.startMood]
+            affirmation.endMood
+              ? `${affirmationImages[affirmation.endMood]}`
+              : `${affirmationImages[affirmation.startMood]}`
           }
           alt='mood-image'
         />
@@ -41,7 +41,7 @@ export const AffirmationItem = ({
             className={`${moodIcon} start-mood-icon ${affirmation.startMood}`}
             title='Affirmations starting mood'
           ></i>
-          {endMood ? (
+          {affirmation.endMood ? (
             <>
               <i
                 className={`${moodIcon} end-mood-icon ${affirmation.startMood}`}

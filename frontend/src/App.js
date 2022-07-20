@@ -6,7 +6,7 @@ import Home from './pages/Home.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
-import Settings from './pages/Settings.jsx';
+// import Settings from './pages/Settings.jsx';
 
 import Header from './components/header/Header.jsx';
 
