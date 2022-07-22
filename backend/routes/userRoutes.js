@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const protectRoute = require('../middlewares/authMiddleware');
+const authorize = require('../middlewares/authMiddleware');
 
 const {
   registerUser,
@@ -10,6 +10,6 @@ const {
 
 router.post('/register', registerUser);
 router.post('/login', loginUser);
-router.get('/me', protectRoute, getUser);
+router.get('/me', authorize, getUser);
 
 module.exports = router;

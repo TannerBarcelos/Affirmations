@@ -1,5 +1,3 @@
-const asyncHandler = require('express-async-handler');
-const bcrypt = require('bcryptjs');
 const User = require('../models/userModel');
 const generateToken = require('../config/generateToken');
 
@@ -9,40 +7,34 @@ const generateToken = require('../config/generateToken');
  * @param {*} request - express request object
  * @param {*} response - express response object
  */
-const registerUser = asyncHandler(async (request, response) => {
+const registerUser = async (request, response) => {
   const { name, email, password, age } = request.body;
-
   if (!name || !email || !password || !age) {
     response.status(400);
     throw new Error('You must enter a name, email, password and your age');
   }
 
-  const user = await User.findOne({ email });
-  if (user) {
-    response.status(400);
-    throw new Error('User with this email already exists. Please log in.');
+  try {
+    // If so, register the user (checks if they exists or not)
+    const user = await User.register(name, email, password, age);
+
+    if (user) {
+      response.status(201);
+      response.json({
+        _id: user.id,
+        age,
+        email,
+        token: generateToken(user.id),
+      });
+    } else {
+      response.status(400);
+      throw new Error('There was a problem signing up.');
+    }
+  } catch (error) {
+    response.status(500);
+    throw new Error(error);
   }
-
-  const pwdSalt = await bcrypt.genSalt(12);
-  const hashedPWD = await bcrypt.hash(password, pwdSalt);
-
-  const newUser = await User.create({
-    name,
-    email,
-    age,
-    password: hashedPWD,
-  });
-
-  if (newUser) {
-    response.status(201);
-    response.json({
-      _id: newUser.id,
-      age,
-      email,
-      token: generateToken(newUser.id),
-    });
-  }
-});
+};
 
 /**
  * @description Login a user
@@ -50,7 +42,7 @@ const registerUser = asyncHandler(async (request, response) => {
  * @param {*} request - express request object
  * @param {*} response - express response object
  */
-const loginUser = asyncHandler(async (request, response) => {
+const loginUser = async (request, response) => {
   const { email, password } = request.body;
 
   if (!email || !password) {
@@ -58,19 +50,26 @@ const loginUser = asyncHandler(async (request, response) => {
     throw new Error('You must enter an email and password to login');
   }
 
-  const user = await User.findOne({ email });
-  if (user && (await bcrypt.compare(password, user.password))) {
-    response.json({
-      _id: user.id,
-      email: user.email,
-      name: user.name,
-      token: generateToken(user.id),
-    });
-  } else {
-    response.status(400);
-    throw new Error('Invalid credentials. Please try again or sign up.');
+  try {
+    // Try logging in the user with the custom static method
+    const user = await User.login(email, password);
+
+    if (user) {
+      response.json({
+        _id: user.id,
+        email: user.email,
+        name: user.name,
+        token: generateToken(user.id),
+      });
+    } else {
+      response.status(400);
+      throw new Error('Invalid credentials. Please try again or sign up.');
+    }
+  } catch (error) {
+    response.status(500);
+    throw new Error(error);
   }
-});
+};
 
 /**
  * @description Get logged in users data - contains userID in JWT so no need to send /:id
@@ -79,10 +78,10 @@ const loginUser = asyncHandler(async (request, response) => {
  * @param {*} response - express response object
  * @access Private
  */
-const getUser = asyncHandler(async (request, response) => {
+const getUser = async (request, response) => {
   response.status(200);
   response.json(request.user);
-});
+};
 
 module.exports = {
   registerUser,
