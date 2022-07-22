@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  getAffirmations,
-  metaSelector,
+  fetchAffirmations,
+  selectAffirmationsMetadata,
   reset,
   selectEntitiesIds,
 } from '../features/affirmations/affirmationSlice';
@@ -26,7 +26,9 @@ const Dashboard = () => {
 
   const { user } = auth;
 
-  const { isError, isLoading, message } = useSelector(metaSelector);
+  const { isError, isLoading, message } = useSelector(
+    selectAffirmationsMetadata,
+  );
 
   const affirmationIds = useSelector(selectEntitiesIds);
 
@@ -38,7 +40,7 @@ const Dashboard = () => {
       navigate('/login');
     }
 
-    dispatch(getAffirmations());
+    dispatch(fetchAffirmations());
 
     return () => {
       dispatch(reset());

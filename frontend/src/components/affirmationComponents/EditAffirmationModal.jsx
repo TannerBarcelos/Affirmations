@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import moodIcons from '../../assets/icons/moodIcons';
 import {
-  metaSelector,
+  selectAffirmationsMetadata,
   updateAffirmation,
 } from '../../features/affirmations/affirmationSlice';
 import { toast } from 'react-toastify';
@@ -21,7 +21,9 @@ const EditAffirmationModal = ({
   const [newMood, setNewMood] = useState('');
 
   const dispatch = useDispatch();
-  const { isError, isSuccess, message } = useSelector(metaSelector);
+  const { isError, isSuccess, message } = useSelector(
+    selectAffirmationsMetadata,
+  );
 
   const customStyles = {
     content: {

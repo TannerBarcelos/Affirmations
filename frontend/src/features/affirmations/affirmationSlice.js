@@ -17,6 +17,7 @@ const initialState = affirmationsAdapter.getInitialState({
   message: '',
 });
 
+// Use RTK Query for next project - this is an exercise for using thunks
 export const createAffirmation = createAsyncThunk(
   'affirmations/create',
   async (affirmation, thunkAPI) => {
@@ -35,7 +36,7 @@ export const createAffirmation = createAsyncThunk(
   },
 );
 
-export const getAffirmations = createAsyncThunk(
+export const fetchAffirmations = createAsyncThunk(
   'affirmations/get',
   async (_, thunkAPI) => {
     try {
@@ -147,16 +148,16 @@ export const affirmationSlice = createSlice({
         state.isSuccess = true;
         state.message = action.payload;
       })
-      .addCase(getAffirmations.pending, (state) => {
+      .addCase(fetchAffirmations.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getAffirmations.fulfilled, (state, action) => {
+      .addCase(fetchAffirmations.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
         affirmationsAdapter.setAll(state, action.payload);
       })
-      .addCase(getAffirmations.rejected, (state, action) => {
+      .addCase(fetchAffirmations.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = true;
@@ -169,9 +170,9 @@ export const affirmationSlice = createSlice({
 // Note that this only works on stores that are normalized. In normalized state, we work with ids and entities to do a table lookup rather than using arrays
 // of objects, etc. See here https://redux.js.org/tutorials/fundamentals/part-8-modern-redux#normalizing-state
 export const {
-  selectEntities: affirmationEntities,
-  selectIds: affirmationIds,
-  selectTotal: totalAffirmations, // returns total number of entities in table
+  selectEntities: selectAffirmationEntities, // selects all entities in entity object
+  selectIds: selectAffirmationIds, // returns all ids in id array
+  selectTotal: selectTotalAffirmations, // returns total number of entities in table
   selectAll: selectAllEntities, // maps over ids array and returns array of the entities in the lookup table found from the ID's in exact same order
   selectById: selectAffirmationEntityById, // selects a specific entity from the lookup table via the given ID
 } = affirmationsAdapter.getSelectors((state) => state.affirmations);
@@ -181,8 +182,7 @@ export const selectEntitiesIds = createSelector(selectAllEntities, (entities) =>
   entities.map((entity) => entity.id),
 );
 
-// Common practice to create our selectors in the slice and then export them to be imported into useSelector where needed
-export const metaSelector = (state) => state.affirmations;
+export const selectAffirmationsMetadata = (state) => state.affirmations;
 
 export const { reset } = affirmationSlice.actions;
 export default affirmationSlice.reducer;

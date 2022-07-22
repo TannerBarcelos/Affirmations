@@ -11,7 +11,7 @@ import { generateDate } from '../../utils/helpers';
 export const AffirmationItem = ({ id, setModalIsOpen, isOpen, editable }) => {
   const dispatch = useDispatch();
 
-  // Get this affirmation from the entities object in our affirmations state
+  // Get this affirmation from the entities object in our affirmations state using the hook selector generated from getSelectors and aliased as the new name
   const affirmation = useSelector((state) =>
     selectAffirmationEntityById(state, id),
   );
@@ -39,7 +39,7 @@ export const AffirmationItem = ({ id, setModalIsOpen, isOpen, editable }) => {
           {affirmation.endMood ? (
             <>
               <i
-                className={`${moodIcon} end-mood-icon ${affirmation.startMood}`}
+                className={`${moodIcon} end-mood-icon ${affirmation.endMood}`}
                 title='Affirmations ending mood'
               ></i>
             </>
