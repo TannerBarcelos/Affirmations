@@ -16,7 +16,6 @@ export const AffirmationItem = ({ id, setModalIsOpen, isOpen, editable }) => {
     selectAffirmationEntityById(state, id),
   );
 
-  const moodIcon = moodIcons[affirmation.startMood];
   return (
     <div className='affirmation-card'>
       <div className='image'>
@@ -33,13 +32,17 @@ export const AffirmationItem = ({ id, setModalIsOpen, isOpen, editable }) => {
         <h4 className='affirmation-text'>{affirmation.affirmation}</h4>
         <div className='affirmation-moods'>
           <i
-            className={`${moodIcon} start-mood-icon ${affirmation.startMood}`}
+            className={`${moodIcons[affirmation.startMood]} start-mood-icon ${
+              affirmation.startMood
+            }`}
             title='Affirmations starting mood'
           ></i>
           {affirmation.endMood ? (
             <>
               <i
-                className={`${moodIcon} end-mood-icon ${affirmation.endMood}`}
+                className={`${moodIcons[affirmation.envMood]} end-mood-icon ${
+                  affirmation.endMood
+                }`}
                 title='Affirmations ending mood'
               ></i>
             </>
