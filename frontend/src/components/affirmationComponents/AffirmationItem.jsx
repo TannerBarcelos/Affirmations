@@ -40,7 +40,7 @@ export const AffirmationItem = ({ id, setModalIsOpen, isOpen, editable }) => {
           {affirmation.endMood ? (
             <>
               <i
-                className={`${moodIcons[affirmation.envMood]} end-mood-icon ${
+                className={`${moodIcons[affirmation.endMood]} end-mood-icon ${
                   affirmation.endMood
                 }`}
                 title='Affirmations ending mood'
