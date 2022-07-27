@@ -75,10 +75,23 @@ const Dashboard = () => {
     );
   };
 
+  const renderWelcome = () => {
+    const today = new Date();
+    const curHr = today.getHours();
+
+    if (curHr < 12) {
+      return 'Good Morning';
+    } else if (curHr < 18) {
+      return 'Good Afternoon';
+    } else {
+      return 'Good Evening';
+    }
+  };
+
   return (
     <div className='container'>
       <section className='dashboard-heading'>
-        <h1>Welcome, {user && user.name}</h1>
+        <h1>{renderWelcome()}</h1>
         <AffirmationForm />
       </section>
       {isLoading ? (
