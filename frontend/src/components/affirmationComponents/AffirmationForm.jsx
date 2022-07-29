@@ -8,7 +8,7 @@ const AffirmationForm = () => {
   const [affirmation, setAffirmation] = useState("")
   const [currentMood, setCurrentMood] = useState("")
 
-  const focusRef = useRef()
+  const focusRef = useRef(null)
 
   const dispatch = useDispatch()
   const { isError, isSuccess, message } = useSelector(
