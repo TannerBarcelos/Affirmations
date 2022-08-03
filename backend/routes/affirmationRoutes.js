@@ -1,7 +1,7 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
 
-const authorize = require('../middlewares/authMiddleware');
+const authorize = require('../middlewares/authMiddleware')
 
 const {
   getAllAffirmations,
@@ -9,12 +9,12 @@ const {
   createAffirmation,
   updateAffirmation,
   deleteAffirmation,
-} = require('../controllers/affirmationController');
+} = require('../controllers/affirmationController')
 
-router.get('/getAll', authorize, getAllAffirmations);
-router.get('/getOne/:id', authorize, getSingleAffirmation);
-router.post('/create', authorize, createAffirmation);
-router.put('/edit/:id', authorize, updateAffirmation);
-router.delete('/delete/:id', authorize, deleteAffirmation);
+router.get('/getAll', authorize, getAllAffirmations)
+router.get('/getOne/:id', authorize, getSingleAffirmation)
+router.post('/create', authorize, createAffirmation)
+router.put('/edit/:id', authorize, updateAffirmation)
+router.delete('/delete/:id', authorize, deleteAffirmation)
 
-module.exports = router;
+module.exports = router
