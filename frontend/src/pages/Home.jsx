@@ -1,10 +1,10 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import mental from '../assets/icons/mental.svg';
-import click from '../assets/icons/click.svg';
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import mental from '../assets/icons/mental.svg'
+import click from '../assets/icons/click.svg'
 
 const Home = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   return (
     <div>
       <section className='hero'>
@@ -36,6 +36,6 @@ const Home = () => {
         </div>
       </section>
     </div>
-  );
-};
-export default Home;
+  )
+}
+export default Home

@@ -29,7 +29,6 @@ const affirmationSchema = mongoose.Schema(
   },
 )
 
-// Transform _id to id to be returned to client
 affirmationSchema.set('toJSON', {
   transform: (doc, o, options) => {
     o.id = o._id

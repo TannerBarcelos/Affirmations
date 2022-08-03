@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import moodIcons from '../../assets/icons/moodIcons';
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import moodIcons from '../../assets/icons/moodIcons'
 import {
   selectAffirmationsMetadata,
   updateAffirmation,
-} from '../../features/affirmations/affirmationSlice';
-import { toast } from 'react-toastify';
-import Modal from 'react-modal';
+} from '../../features/affirmations/affirmationSlice'
+import { toast } from 'react-toastify'
+import Modal from 'react-modal'
 
 const EditAffirmationModal = ({
   editableAffirmation,
@@ -14,16 +14,16 @@ const EditAffirmationModal = ({
   onRequestClose,
   contentLabel,
 }) => {
-  const { id, affirmation, startMood } = editableAffirmation;
+  const { id, affirmation, startMood } = editableAffirmation
 
-  const [newAffirmation, setNewAffirmation] = useState(affirmation);
-  const [oldMood] = useState(startMood);
-  const [newMood, setNewMood] = useState('');
+  const [newAffirmation, setNewAffirmation] = useState(affirmation)
+  const [oldMood] = useState(startMood)
+  const [newMood, setNewMood] = useState('')
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const { isError, isSuccess, message } = useSelector(
     selectAffirmationsMetadata,
-  );
+  )
 
   const customStyles = {
     content: {
@@ -34,38 +34,38 @@ const EditAffirmationModal = ({
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
     },
-  };
+  }
 
-  Modal.setAppElement(document.getElementById('root'));
+  Modal.setAppElement(document.getElementById('root'))
 
   const onSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!newAffirmation.length > 0 || !newMood.length > 0) {
-      toast.error('You must enter an affirmation and a mood');
-      return;
+      toast.error('You must enter an affirmation and a mood')
+      return
     }
 
     const affirmationPayload = {
       id,
       affirmation: newAffirmation,
       endMood: newMood,
-    };
+    }
 
-    dispatch(updateAffirmation(affirmationPayload));
+    dispatch(updateAffirmation(affirmationPayload))
 
     if (isSuccess) {
-      toast.success('Affirmation Edited!');
-      onRequestClose(!isOpen);
+      toast.success('Affirmation Edited!')
+      onRequestClose(!isOpen)
     }
 
     if (isError) {
-      toast.error('Something went wrong ' + message);
+      toast.error('Something went wrong ' + message)
     }
 
-    setNewAffirmation('');
-    setNewMood('');
-  };
+    setNewAffirmation('')
+    setNewMood('')
+  }
 
   return (
     <Modal
@@ -96,7 +96,7 @@ const EditAffirmationModal = ({
                   className={`${key} ${mood} mood-icon`}
                   onClick={(e) => setNewMood(e.target.classList[0])}
                 ></i>
-              );
+              )
             })}
           </div>
           <div className='form-group'>
@@ -115,6 +115,6 @@ const EditAffirmationModal = ({
         </form>
       </section>
     </Modal>
-  );
-};
-export default EditAffirmationModal;
+  )
+}
+export default EditAffirmationModal

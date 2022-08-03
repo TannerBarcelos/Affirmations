@@ -24,7 +24,6 @@ const userSchema = mongoose.Schema(
   { timestamps: true },
 )
 
-// Static Register Method - non-arrow because 'this' does not work in arrow contexts
 userSchema.statics.register = async function (name, email, password, age) {
   const userExists = await this.findOne({ email })
 

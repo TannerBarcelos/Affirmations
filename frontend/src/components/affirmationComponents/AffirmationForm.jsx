@@ -1,12 +1,12 @@
-import React, { useState, useRef } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import moodIcons from "../../assets/icons/moodIcons"
-import { createAffirmation } from "../../features/affirmations/affirmationSlice"
-import { toast } from "react-toastify"
+import React, { useState, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import moodIcons from '../../assets/icons/moodIcons'
+import { createAffirmation } from '../../features/affirmations/affirmationSlice'
+import { toast } from 'react-toastify'
 
 const AffirmationForm = () => {
-  const [affirmation, setAffirmation] = useState("")
-  const [currentMood, setCurrentMood] = useState("")
+  const [affirmation, setAffirmation] = useState('')
+  const [currentMood, setCurrentMood] = useState('')
 
   const focusRef = useRef(null)
 
@@ -19,7 +19,7 @@ const AffirmationForm = () => {
     e.preventDefault()
 
     if (!affirmation.length > 0 || !currentMood.length > 0) {
-      toast.error("You must enter an affirmation and a mood")
+      toast.error('You must enter an affirmation and a mood')
       return
     }
 
@@ -27,35 +27,35 @@ const AffirmationForm = () => {
     dispatch(createAffirmation(affirmationPayload))
 
     if (isSuccess) {
-      toast.success("Affirmation created!")
+      toast.success('Affirmation created!')
       focusRef.current.focus()
     }
 
     if (isError) {
-      toast.error("Something went wrong " + message)
+      toast.error('Something went wrong ' + message)
     }
 
-    setAffirmation("")
-    setCurrentMood("")
+    setAffirmation('')
+    setCurrentMood('')
   }
 
   return (
-    <section className="form affirmation-form">
-      <h2 className="affirmation-cta">Create Your Affirmation</h2>
+    <section className='form affirmation-form'>
+      <h2 className='affirmation-cta'>Create Your Affirmation</h2>
       <form onSubmit={onSubmit}>
-        <div className="form-group affirmation-box">
+        <div className='form-group affirmation-box'>
           <input
             ref={focusRef}
-            type="text"
-            name="affirmation"
-            id="affirmation-input"
+            type='text'
+            name='affirmation'
+            id='affirmation-input'
             value={affirmation}
-            placeholder="Enter your affirmation"
+            placeholder='Enter your affirmation'
             onChange={(e) => setAffirmation(e.target.value)}
           />
         </div>
-        <h3 className="mood-cta">Select Your Current Mood</h3>
-        <div className="form-group mood-box">
+        <h3 className='mood-cta'>Select Your Current Mood</h3>
+        <div className='form-group mood-box'>
           {Object.entries(moodIcons).map(([key, mood]) => {
             return (
               <i
@@ -66,8 +66,8 @@ const AffirmationForm = () => {
             )
           })}
         </div>
-        <div className="form-group">
-          <button type="submit" className="btn">
+        <div className='form-group'>
+          <button type='submit' className='btn'>
             Submit
           </button>
         </div>

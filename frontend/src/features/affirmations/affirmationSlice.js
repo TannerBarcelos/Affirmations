@@ -3,23 +3,21 @@ import {
   createAsyncThunk,
   createEntityAdapter,
   createSelector,
-} from "@reduxjs/toolkit"
+} from '@reduxjs/toolkit'
 
-import { Services } from "../../utils/Services"
+import { Services } from '../../utils/Services'
 
-// Normalizing state
 const affirmationsAdapter = createEntityAdapter()
 
 const initialState = affirmationsAdapter.getInitialState({
   isError: false,
   isSuccess: false,
   isLoading: false,
-  message: "",
+  message: '',
 })
 
-// Use RTK Query for next project - this is an exercise for using thunks
 export const createAffirmation = createAsyncThunk(
-  "affirmations/create",
+  'affirmations/create',
   async (affirmation, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
@@ -37,7 +35,7 @@ export const createAffirmation = createAsyncThunk(
 )
 
 export const fetchAffirmations = createAsyncThunk(
-  "affirmations/get",
+  'affirmations/get',
   async (_, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
@@ -55,7 +53,7 @@ export const fetchAffirmations = createAsyncThunk(
 )
 
 export const deleteAffirmation = createAsyncThunk(
-  "affirmations/delete",
+  'affirmations/delete',
   async (id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
@@ -73,11 +71,10 @@ export const deleteAffirmation = createAsyncThunk(
 )
 
 export const updateAffirmation = createAsyncThunk(
-  "affirmations/update",
+  'affirmations/update',
   async (affirmation, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
-      console.log(affirmation)
       return await Services.affirmations.update(
         affirmation.id,
         affirmation,
@@ -96,7 +93,7 @@ export const updateAffirmation = createAsyncThunk(
 )
 
 export const affirmationSlice = createSlice({
-  name: "affirmations",
+  name: 'affirmations',
   initialState,
   reducers: {
     reset: (_) => initialState,
@@ -166,22 +163,17 @@ export const affirmationSlice = createSlice({
   },
 })
 
-// getSelectors returns 5 selectors (selectAll, selectById, selectTotal, selectEntities, selectIds)
-// Note that this only works on stores that are normalized. In normalized state, we work with ids and entities to do a table lookup rather than using arrays
-// of objects, etc. See here https://redux.js.org/tutorials/fundamentals/part-8-modern-redux#normalizing-state
 export const {
-  selectEntities: selectAffirmationEntities, // selects all entities in entity object
-  selectIds: selectAffirmationIds, // returns all ids in id array
-  selectTotal: selectTotalAffirmations, // returns total number of entities in table
-  selectAll: selectAllEntities, // maps over ids array and returns array of the entities in the lookup table found from the ID's in exact same order
-  selectById: selectAffirmationEntityById, // selects a specific entity from the lookup table via the given ID
+  selectEntities: selectAffirmationEntities,
+  selectIds: selectAffirmationIds,
+  selectTotal: selectTotalAffirmations,
+  selectAll: selectAllEntities,
+  selectById: selectAffirmationEntityById,
 } = affirmationsAdapter.getSelectors((state) => state.affirmations)
 
-// Memoize selector - memoize selecting all entity IDs
 export const selectEntitiesIds = createSelector(selectAllEntities, (entities) =>
   entities.map((entity) => entity.id),
 )
-
 export const selectAffirmationsMetadata = (state) => state.affirmations
 
 export const { reset } = affirmationSlice.actions

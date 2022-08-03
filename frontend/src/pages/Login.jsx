@@ -1,59 +1,59 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { login, reset } from '../features/auth/authSlice';
+import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { login, reset } from '../features/auth/authSlice'
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-  });
-  const { email, password } = formData;
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  })
+  const { email, password } = formData
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const { user, isError, isSuccess, message } = useSelector(
     (state) => state.auth,
-  );
+  )
 
   useEffect(() => {
     if (isError) {
-      toast.error(message);
+      toast.error(message)
     }
 
     if (isSuccess || user) {
-      navigate('/dashboard');
+      navigate('/dashboard')
     }
 
     if (isSuccess) {
-      toast.success('User Logged In Successfully!');
+      toast.success('User Logged In Successfully!')
       setTimeout(() => {
-        navigate('/dashboard');
-      }, 2000);
+        navigate('/dashboard')
+      }, 2000)
     }
 
     return () => {
-      dispatch(reset());
-    };
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+      dispatch(reset())
+    }
+  }, [user, isError, isSuccess, message, navigate, dispatch])
   const onChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    });
-  };
+    })
+  }
   const onSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     if (!email || !password) {
-      toast.error('You Must Enter a Password and Email to Continue');
+      toast.error('You Must Enter a Password and Email to Continue')
     } else {
       const user = {
         email,
         password,
-      };
-      dispatch(login(user));
+      }
+      dispatch(login(user))
     }
-  };
+  }
   return (
     <div className='auth-container'>
       <section className='heading'>
@@ -98,6 +98,6 @@ const Login = () => {
         </p>
       </section>
     </div>
-  );
-};
-export default Login;
+  )
+}
+export default Login

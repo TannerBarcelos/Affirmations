@@ -15,7 +15,6 @@ const registerUser = async (request, response) => {
   }
 
   try {
-    // If so, register the user (checks if they exists or not)
     const user = await User.register(name, email, password, age)
 
     if (user) {
@@ -51,7 +50,6 @@ const loginUser = async (request, response) => {
   }
 
   try {
-    // Try logging in the user with the custom static method
     const user = await User.login(email, password)
 
     if (user) {

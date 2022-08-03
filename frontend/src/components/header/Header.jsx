@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { logout, reset } from '../../features/auth/authSlice';
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { logout, reset } from '../../features/auth/authSlice'
 
 const Header = () => {
-  const [isShowing, setIsShowing] = useState(false);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
+  const [isShowing, setIsShowing] = useState(false)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const { user } = useSelector((state) => state.auth)
 
   const onLogout = () => {
-    dispatch(logout());
-    dispatch(reset());
-    navigate('/');
-  };
+    dispatch(logout())
+    dispatch(reset())
+    navigate('/')
+  }
 
   const showNavItems = () => {
     if (user) {
@@ -23,13 +23,6 @@ const Header = () => {
             <Link to='dashboard' className='nav-item-link'>
               <i className='fa-solid fa-house-user'></i>
             </Link>
-            {/* <Link
-              to='settings'
-              className='nav-item-link'
-              style={{ marginRight: '1rem' }}
-            >
-              <i className='fa-solid fa-gear'></i>
-            </Link> */}
           </li>
           <li className='nav-item logout-btn' onClick={onLogout}>
             <i className='fa-solid fa-arrow-right-from-bracket'></i>
@@ -38,7 +31,7 @@ const Header = () => {
             </span>
           </li>
         </>
-      );
+      )
     } else {
       return (
         <>
@@ -59,9 +52,9 @@ const Header = () => {
             </Link>
           </li>
         </>
-      );
+      )
     }
-  };
+  }
 
   const showResponsiveMenu = () => {
     if (isShowing) {
@@ -89,23 +82,13 @@ const Header = () => {
                   </span>
                 </Link>
               </li>
-              {/* <li className='nav-item' onClick={(e) => setIsShowing(false)}>
-                <Link to='/settings' className='nav-item-link'>
-                  <i className='fa-solid fa-gear'></i>
-                  <span
-                    style={{ display: 'inline-block', paddingLeft: '1rem' }}
-                  >
-                    Settings
-                  </span>
-                </Link>
-              </li> */}
               <li
                 style={{
                   listStyle: 'none',
                 }}
                 onClick={(e) => {
-                  setIsShowing(false);
-                  onLogout();
+                  setIsShowing(false)
+                  onLogout()
                 }}
               >
                 <i className='fa-solid fa-arrow-right-from-bracket'></i>
@@ -118,7 +101,7 @@ const Header = () => {
               </li>
             </ul>
           </div>
-        );
+        )
       } else {
         return (
           <div className='responsive-links'>
@@ -145,10 +128,10 @@ const Header = () => {
               </li>
             </ul>
           </div>
-        );
+        )
       }
     }
-  };
+  }
 
   return (
     <>
@@ -179,6 +162,6 @@ const Header = () => {
       </header>
       {showResponsiveMenu()}
     </>
-  );
-};
-export default Header;
+  )
+}
+export default Header

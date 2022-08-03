@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const Settings = () => {
   return (
@@ -8,6 +8,6 @@ const Settings = () => {
       </section>
       <section className='settings-section'></section>
     </div>
-  );
-};
-export default Settings;
+  )
+}
+export default Settings

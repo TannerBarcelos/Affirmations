@@ -1,20 +1,19 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import moodIcons from '../../assets/icons/moodIcons';
-import affirmationImages from '../../assets/images/affirmationImages';
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import moodIcons from '../../assets/icons/moodIcons'
+import affirmationImages from '../../assets/images/affirmationImages'
 import {
   deleteAffirmation,
   selectAffirmationEntityById,
-} from '../../features/affirmations/affirmationSlice';
-import { generateDate } from '../../utils/helpers';
+} from '../../features/affirmations/affirmationSlice'
+import { generateDate } from '../../utils/helpers'
 
 export const AffirmationItem = ({ id, setModalIsOpen, isOpen, editable }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  // Get this affirmation from the entities object in our affirmations state using the hook selector generated from getSelectors and aliased as the new name
   const affirmation = useSelector((state) =>
     selectAffirmationEntityById(state, id),
-  );
+  )
 
   return (
     <div className='affirmation-card'>
@@ -59,8 +58,8 @@ export const AffirmationItem = ({ id, setModalIsOpen, isOpen, editable }) => {
           className='fa-solid fa-pen-to-square'
           title='Update this Affirmation'
           onClick={(e) => {
-            setModalIsOpen(!isOpen);
-            editable(affirmation);
+            setModalIsOpen(!isOpen)
+            editable(affirmation)
           }}
         ></i>
         <span
@@ -71,5 +70,5 @@ export const AffirmationItem = ({ id, setModalIsOpen, isOpen, editable }) => {
         </span>
       </div>
     </div>
-  );
-};
+  )
+}

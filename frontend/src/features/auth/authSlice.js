@@ -1,18 +1,18 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import { Services } from "../../utils/Services"
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { Services } from '../../utils/Services'
 
-const user = JSON.parse(localStorage.getItem("user"))
+const user = JSON.parse(localStorage.getItem('user'))
 
 const initialState = {
   user: user ? user : null,
   isError: false,
   isSuccess: false,
   isLoading: false,
-  message: "",
+  message: '',
 }
 
 export const register = createAsyncThunk(
-  "auth/register",
+  'auth/register',
   async (user, thunkAPI) => {
     try {
       return await Services.auth.register(user)
@@ -28,7 +28,7 @@ export const register = createAsyncThunk(
   },
 )
 
-export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
+export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
   try {
     return await Services.auth.login(user)
   } catch (error) {
@@ -40,19 +40,19 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
   }
 })
 
-export const logout = createAsyncThunk("auth/logout", async () =>
+export const logout = createAsyncThunk('auth/logout', async () =>
   Services.auth.logout(),
 )
 
 export const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState: initialState,
   reducers: {
     reset: (state) => {
       state.isLoading = false
       state.isError = false
       state.isSuccess = false
-      state.message = ""
+      state.message = ''
     },
   },
   extraReducers: (builder) => {
@@ -91,7 +91,6 @@ export const authSlice = createSlice({
   },
 })
 
-// Selectors - no normalized state for auth so straight forward
 export const userAuth = (state) => state.auth
 
 export const { reset } = authSlice.actions

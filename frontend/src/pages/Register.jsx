@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { register, reset } from '../features/auth/authSlice';
+import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { register, reset } from '../features/auth/authSlice'
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -11,55 +11,55 @@ const Register = () => {
     password: '',
     password2: '',
     age: '',
-  });
+  })
 
-  const { name, email, password, password2, age } = formData;
+  const { name, email, password, password2, age } = formData
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const { user, isError, isSuccess, message } = useSelector(
     (state) => state.auth,
-  );
+  )
 
   useEffect(() => {
     if (isError) {
-      toast.error(message);
+      toast.error(message)
     }
 
     if (user) {
-      navigate('/dashboard');
+      navigate('/dashboard')
     }
 
     if (isSuccess) {
-      toast.success('User Created!');
+      toast.success('User Created!')
       setTimeout(() => {
-        navigate('/dashboard');
-      }, 2000);
+        navigate('/dashboard')
+      }, 2000)
     }
 
-    dispatch(reset());
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+    dispatch(reset())
+  }, [user, isError, isSuccess, message, navigate, dispatch])
 
   const onChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    });
-  };
+    })
+  }
   const onSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     if (password !== password2) {
-      toast.error('Passwords do not match');
+      toast.error('Passwords do not match')
     } else {
       const user = {
         name,
         email,
         password,
         age,
-      };
-      dispatch(register(user));
+      }
+      dispatch(register(user))
     }
-  };
+  }
 
   return (
     <div className='auth-container'>
@@ -138,6 +138,6 @@ const Register = () => {
         </p>
       </section>
     </div>
-  );
-};
-export default Register;
+  )
+}
+export default Register
