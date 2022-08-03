@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const affirmationSchema = mongoose.Schema(
   {
@@ -27,15 +27,15 @@ const affirmationSchema = mongoose.Schema(
   {
     timestamps: true,
   },
-);
+)
 
 // Transform _id to id to be returned to client
 affirmationSchema.set('toJSON', {
   transform: (doc, o, options) => {
-    o.id = o._id;
-    delete o._id;
-    delete o.__v;
+    o.id = o._id
+    delete o._id
+    delete o.__v
   },
-});
+})
 
-module.exports = mongoose.model('Affirmation', affirmationSchema);
+module.exports = mongoose.model('Affirmation', affirmationSchema)

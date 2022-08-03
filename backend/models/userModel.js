@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+const mongoose = require('mongoose')
+const bcrypt = require('bcryptjs')
 
 const userSchema = mongoose.Schema(
   {
@@ -22,33 +22,33 @@ const userSchema = mongoose.Schema(
     },
   },
   { timestamps: true },
-);
+)
 
 // Static Register Method - non-arrow because 'this' does not work in arrow contexts
 userSchema.statics.register = async function (name, email, password, age) {
-  const userExists = await this.findOne({ email });
+  const userExists = await this.findOne({ email })
 
   if (userExists) {
-    throw new Error('User with this email already exists. Please log in.');
+    throw new Error('User with this email already exists. Please log in.')
   }
 
-  const hashedPWD = await bcrypt.hash(password, await bcrypt.genSalt(12));
+  const hashedPWD = await bcrypt.hash(password, await bcrypt.genSalt(12))
 
   const newUser = await this.create({
     name,
     email,
     age,
     password: hashedPWD,
-  });
-  return newUser;
-};
+  })
+  return newUser
+}
 
 userSchema.statics.login = async function (email, password) {
-  const user = await this.findOne({ email });
+  const user = await this.findOne({ email })
 
   if (user && (await bcrypt.compare(password, user.password))) {
-    return user;
+    return user
   }
-};
+}
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema)
