@@ -30,7 +30,6 @@ services:
     stdin_open: true
     restart: 'no'
     environment:
-      - NODE_ENV=development
       - CHOKIDAR_USEPOLLING=true
     build:
       dockerfile: Dockerfile.dev
