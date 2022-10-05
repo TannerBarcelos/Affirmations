@@ -14,6 +14,6 @@ Affirmation is an application that let's you create daily affirmations of positi
 
 Affirmations mission is to help you gain self confidence, improve how you tackle and improve your mental health and foster the ability to think and learn from your past to improve your future.
 
-### App Architecture
+### Application Architecture
 
 ![Architecture](https://github.com/TannerBarcelos/Affirmation/blob/main/AffirmationsArchitecture.drawio.png)
