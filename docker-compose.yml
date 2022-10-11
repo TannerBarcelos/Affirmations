@@ -8,6 +8,7 @@ services:
       - '80:80'
     image: 'tannermbarcelos/affirmations-nginx'
   server:
+    container_name: 'server'
     image: 'tannermbarcelos/affirmations-server'
     mem_limit: 128m
     hostname: server
@@ -18,6 +19,7 @@ services:
       - NODE_DOCKER_PORT=$NODE_DOCKER_PORT
       - NODE_ENV=$NODE_ENV
   client:
+    container_name: 'client'
     mem_limit: 128m
     hostname: client
     image: 'tannermbarcelos/affirmations-client'
