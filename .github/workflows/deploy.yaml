@@ -8,16 +8,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      # Log in to Docker CLI to run Docker locally and communicate with Docker Hub with user creds.
       - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
+      # Build Docker images for Nginx, React and Node servers so Docker Compose can use production builds of the images each container will be based off of
       - run: docker build -t tannermbarcelos/affirmations-client ./frontend
       - run: docker build -t tannermbarcelos/affirmations-nginx ./nginx
       - run: docker build -t tannermbarcelos/affirmations-server ./backend
 
+      # Push them up to Dockerhub so that docker-compose will pull them correctly when ran in the Docker AWS EB environment
       - run: docker push tannermbarcelos/affirmations-client
       - run: docker push tannermbarcelos/affirmations-nginx
       - run: docker push tannermbarcelos/affirmations-server
 
+      # Zip the whole app assets and code to be placed in S3
       - name: Zip and Generate deployment package
         run: zip -r deploy.zip . -x '*.git*'
 
