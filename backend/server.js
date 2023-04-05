@@ -8,7 +8,7 @@ connectDB()
 
 const app = express()
 
-const PORT = process.env.NODE_DOCKER_PORT || 4000
+const PORT = process.env.PORT || 4000
 const VERSION = process.env.VERSION
 
 app.use( cors() )
