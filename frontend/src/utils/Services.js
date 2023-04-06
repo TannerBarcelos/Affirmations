@@ -1,75 +1,88 @@
 import axios from 'axios'
 
-const API_URL = '/api/v1'
-const usersAPI = '/users'
-const affirmationsAPI = '/affirmations'
+const proxyPrefix = "/api"
+const userRoutes = "/users"
+const affirmationRoutes = "/affirmations"
+
+const endpoints = {
+  auth: {
+    register: `${proxyPrefix}${userRoutes}/register`,
+    login: `${proxyPrefix}${userRoutes}/login`,
+  },
+  affirmations: {
+    create: `${proxyPrefix}${affirmationRoutes}/create`,
+    delete: `${proxyPrefix}${affirmationRoutes}/delete`,
+    getAll: `${proxyPrefix}${affirmationRoutes}/getAll`,
+    update: `${proxyPrefix}${affirmationRoutes}/edit`,
+  },
+}
 
 export const Services = {
   auth: {
-    register: async (user) => {
-      const { data } = await axios.post(`${API_URL}${usersAPI}/register`, user)
-      if (data) {
-        localStorage.setItem('user', JSON.stringify(data))
+    register: async ( user ) => {
+      const { data } = await axios.post( endpoints.auth.register, user )
+      if ( data ) {
+        localStorage.setItem( 'user', JSON.stringify( data ) )
       }
       return data
     },
-    login: async (user) => {
-      const { data } = await axios.post(`${API_URL}${usersAPI}/login`, user)
-      if (data) {
-        localStorage.setItem('user', JSON.stringify(data))
+    login: async ( user ) => {
+      const { data } = await axios.post( endpoints.auth.login, user )
+      if ( data ) {
+        localStorage.setItem( 'user', JSON.stringify( data ) )
       }
       return data
     },
     logout: () => {
-      localStorage.removeItem('user')
+      localStorage.removeItem( 'user' )
     },
   },
   affirmations: {
-    create: async (affirmation, token) => {
+    create: async ( affirmation, token ) => {
       const options = {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }
       const { data } = await axios.post(
-        `${API_URL}${affirmationsAPI}/create`,
+        endpoints.affirmations.create,
         affirmation,
         options,
       )
       return data
     },
-    delete: async (id, token) => {
+    delete: async ( id, token ) => {
       const options = {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }
       const { data } = await axios.delete(
-        `${API_URL}${affirmationsAPI}/delete/${id}`,
+        endpoints.affirmations.delete + `/${id}`,
         options,
       )
       return data
     },
-    getAll: async (token) => {
+    getAll: async ( token ) => {
       const options = {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }
       const { data } = await axios.get(
-        `${API_URL}${affirmationsAPI}/getAll`,
+        endpoints.affirmations.getAll,
         options,
       )
       return data
     },
-    update: async (id, affirmation, token) => {
+    update: async ( id, affirmation, token ) => {
       const options = {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }
       const { data } = await axios.put(
-        `${API_URL}${affirmationsAPI}/edit/${id}`,
+        endpoints.affirmations.update + `/${id}`,
         affirmation,
         options,
       )
