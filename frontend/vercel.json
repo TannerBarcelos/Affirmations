@@ -1,3 +1,5 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+  "rewrites": [{ "source": "/(.*)", "destination": "/" },
+          { "source": "/api/:path(.*)", "destination": "https://affirmations-service-wyf9.onrender.com/:path" }
+]
 }
