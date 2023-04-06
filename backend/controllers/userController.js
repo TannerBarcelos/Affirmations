@@ -1,5 +1,5 @@
-const User = require('../models/userModel')
-const generateToken = require('../config/generateToken')
+const User = require( '../models/userModel' )
+const generateToken = require( '../config/generateToken' )
 
 /**
  * @description Register a user
@@ -7,31 +7,31 @@ const generateToken = require('../config/generateToken')
  * @param {*} request - express request object
  * @param {*} response - express response object
  */
-const registerUser = async (request, response) => {
+const registerUser = async ( request, response ) => {
   const { name, email, password, age } = request.body
-  if (!name || !email || !password || !age) {
-    response.status(400)
-    throw new Error('You must enter a name, email, password and your age')
+  if ( !name || !email || !password || !age ) {
+    response.status( 400 )
+    throw new Error( 'You must enter a name, email, password and your age' )
   }
 
   try {
-    const user = await User.register(name, email, password, age)
+    const user = await User.register( name, email, password, age )
 
-    if (user) {
-      response.status(201)
-      response.json({
+    if ( user ) {
+      response.status( 201 )
+      response.json( {
         _id: user.id,
         age,
         email,
-        token: generateToken(user.id),
-      })
+        token: generateToken( user.id ),
+      } )
     } else {
-      response.status(400)
-      throw new Error('There was a problem signing up.')
+      response.status( 400 )
+      throw new Error( 'There was a problem signing up.' )
     }
-  } catch (error) {
-    response.status(500)
-    throw new Error(error)
+  } catch ( error ) {
+    response.status( 500 )
+    throw new Error( error )
   }
 }
 
@@ -41,31 +41,31 @@ const registerUser = async (request, response) => {
  * @param {*} request - express request object
  * @param {*} response - express response object
  */
-const loginUser = async (request, response) => {
+const loginUser = async ( request, response ) => {
   const { email, password } = request.body
 
-  if (!email || !password) {
-    response.status(400)
-    throw new Error('You must enter an email and password to login')
+  if ( !email || !password ) {
+    response.status( 400 )
+    throw new Error( 'You must enter an email and password to login' )
   }
 
   try {
-    const user = await User.login(email, password)
+    const user = await User.login( email, password )
 
-    if (user) {
-      response.json({
+    if ( user ) {
+      response.json( {
         _id: user.id,
         email: user.email,
         name: user.name,
-        token: generateToken(user.id),
-      })
+        token: generateToken( user.id ),
+      } )
     } else {
-      response.status(400)
-      throw new Error('Invalid credentials. Please try again or sign up.')
+      response.status( 400 )
+      throw new Error( 'Invalid credentials. Please try again or sign up.' )
     }
-  } catch (error) {
-    response.status(500)
-    throw new Error(error)
+  } catch ( error ) {
+    response.status( 500 )
+    throw new Error( error )
   }
 }
 
@@ -76,9 +76,9 @@ const loginUser = async (request, response) => {
  * @param {*} response - express response object
  * @access Private
  */
-const getUser = async (request, response) => {
-  response.status(200)
-  response.json(request.user)
+const getUser = async ( request, response ) => {
+  response.status( 200 )
+  response.json( request.user )
 }
 
 module.exports = {

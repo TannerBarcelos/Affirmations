@@ -8,6 +8,7 @@ import {
 } from '../../features/affirmations/affirmationSlice'
 import { generateDate } from '../../utils/helpers'
 
+
 export const AffirmationItem = ({ id, setModalIsOpen, isOpen, editable }) => {
   const dispatch = useDispatch()
 

@@ -1,4 +1,4 @@
-const affirmationModel = require('../models/affirmationModel')
+const affirmationModel = require( '../models/affirmationModel' )
 
 /**
  * @description Get all affirmations
@@ -6,13 +6,13 @@ const affirmationModel = require('../models/affirmationModel')
  * @param {*} request - express request object
  * @param {*} response - express response object
  */
-const getAllAffirmations = async (request, response) => {
+const getAllAffirmations = async ( request, response ) => {
   try {
-    const affirmations = await affirmationModel.find({ user: request.user.id })
-    response.status(200).json(affirmations)
-  } catch (error) {
-    response.status(500)
-    throw new Error(error)
+    const affirmations = await affirmationModel.find( { user: request.user.id } )
+    response.status( 200 ).json( affirmations )
+  } catch ( error ) {
+    response.status( 500 )
+    throw new Error( error )
   }
 }
 
@@ -22,26 +22,26 @@ const getAllAffirmations = async (request, response) => {
  * @param {*} request - express request object
  * @param {*} response - express response object
  */
-const getSingleAffirmation = async (request, response) => {
+const getSingleAffirmation = async ( request, response ) => {
   const { id } = request.params
   try {
-    const affirmation = await affirmationModel.findById(id)
+    const affirmation = await affirmationModel.findById( id )
     const user = request.user
-    if (!affirmation) {
-      response.status(400)
-      throw new Error('This affirmation does not exist')
+    if ( !affirmation ) {
+      response.status( 400 )
+      throw new Error( 'This affirmation does not exist' )
     }
-    if (affirmation.user.toString() !== user.id) {
-      response.status(401)
-      throw new Error('User not authorized')
+    if ( affirmation.user.toString() !== user.id ) {
+      response.status( 401 )
+      throw new Error( 'User not authorized' )
     }
-    response.status(200).json({
+    response.status( 200 ).json( {
       id: affirmation._id,
       ...affirmation,
-    })
-  } catch (error) {
-    response.status(500)
-    throw new Error(error)
+    } )
+  } catch ( error ) {
+    response.status( 500 )
+    throw new Error( error )
   }
 }
 
@@ -51,26 +51,26 @@ const getSingleAffirmation = async (request, response) => {
  * @param {*} request - express request object
  * @param {*} response - express response object
  */
-const createAffirmation = async (request, response) => {
+const createAffirmation = async ( request, response ) => {
   const { currentMood, affirmation } = request.body
-  if (!currentMood || !affirmation) {
-    response.status(400)
+  if ( !currentMood || !affirmation ) {
+    response.status( 400 )
     throw new Error(
       'You must submit an affirmation and your current mood to log this entry',
     )
   }
   const { id } = request.user
   try {
-    const affirm = await affirmationModel.create({
+    const affirm = await affirmationModel.create( {
       user: id,
       startMood: currentMood,
       endMood: '',
       affirmation,
-    })
-    response.status(200).json(affirm)
-  } catch (error) {
-    response.status(500)
-    throw new Error(error)
+    } )
+    response.status( 200 ).json( affirm )
+  } catch ( error ) {
+    response.status( 500 )
+    throw new Error( error )
   }
 }
 
@@ -80,21 +80,21 @@ const createAffirmation = async (request, response) => {
  * @param {*} request - express request object
  * @param {*} response - express response object
  */
-const updateAffirmation = async (request, response) => {
+const updateAffirmation = async ( request, response ) => {
   const { id } = request.params
   const { endMood, affirmation } = request.body
   const user = request.user
 
   try {
-    const affirm = await affirmationModel.findById(id)
+    const affirm = await affirmationModel.findById( id )
 
-    if (!affirm) {
-      response.status(400)
-      throw new Error('Affirmation not found')
+    if ( !affirm ) {
+      response.status( 400 )
+      throw new Error( 'Affirmation not found' )
     }
-    if (affirm.user.toString() !== user.id) {
-      response.status(401)
-      throw new Error('User not authorized')
+    if ( affirm.user.toString() !== user.id ) {
+      response.status( 401 )
+      throw new Error( 'User not authorized' )
     }
 
     const updatedAffirmation = await affirmationModel.findByIdAndUpdate(
@@ -105,10 +105,10 @@ const updateAffirmation = async (request, response) => {
       },
       { new: true },
     )
-    response.status(200).json(updatedAffirmation)
-  } catch (error) {
-    response.status(500)
-    throw new Error(error)
+    response.status( 200 ).json( updatedAffirmation )
+  } catch ( error ) {
+    response.status( 500 )
+    throw new Error( error )
   }
 }
 
@@ -118,28 +118,28 @@ const updateAffirmation = async (request, response) => {
  * @param {*} request - express request object
  * @param {*} response - express response object
  */
-const deleteAffirmation = async (request, response) => {
+const deleteAffirmation = async ( request, response ) => {
   const { id } = request.params
   const user = request.user
 
   try {
-    const affirm = await affirmationModel.findById(id)
+    const affirm = await affirmationModel.findById( id )
 
-    if (!affirm) {
-      response.status(400)
-      throw new Error('Affirmation not found')
+    if ( !affirm ) {
+      response.status( 400 )
+      throw new Error( 'Affirmation not found' )
     }
 
-    if (affirm.user.toString() !== user.id) {
-      response.status(401)
-      throw new Error('User not authorized')
+    if ( affirm.user.toString() !== user.id ) {
+      response.status( 401 )
+      throw new Error( 'User not authorized' )
     }
 
-    await affirmationModel.remove(affirm)
-    response.status(200).json({ id })
-  } catch (error) {
-    response.status(500)
-    throw new Error(error)
+    await affirmationModel.remove( affirm )
+    response.status( 200 ).json( { id } )
+  } catch ( error ) {
+    response.status( 500 )
+    throw new Error( error )
   }
 }
 

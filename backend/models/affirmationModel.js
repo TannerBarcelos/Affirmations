@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require( 'mongoose' )
 
 const affirmationSchema = mongoose.Schema(
   {
@@ -29,12 +29,12 @@ const affirmationSchema = mongoose.Schema(
   },
 )
 
-affirmationSchema.set('toJSON', {
-  transform: (doc, o, options) => {
+affirmationSchema.set( 'toJSON', {
+  transform: ( doc, o, options ) => {
     o.id = o._id
     delete o._id
     delete o.__v
   },
-})
+} )
 
-module.exports = mongoose.model('Affirmation', affirmationSchema)
+module.exports = mongoose.model( 'Affirmation', affirmationSchema )
