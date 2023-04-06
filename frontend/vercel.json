@@ -2,8 +2,8 @@
   "rewrites": [
     { "source": "/(.*)", "destination": "/" },
     {
-      "source": "/backend/:*",
-      "destination": "https://affirmations-service-wyf9.onrender.com/api/:*"
+      "source": "/backend/:splat*",
+      "destination": "https://affirmations-service-wyf9.onrender.com/api/:splat*"
     }
   ]
-}
+} 
