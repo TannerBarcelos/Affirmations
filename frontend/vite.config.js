@@ -7,7 +7,7 @@ export default ( { mode } ) => {
     plugins: [react()],
     server: {
       proxy: {
-        '/api': {
+        '/backend': {
           target: process.env.VITE_BACKEND_URL,
         }
       }

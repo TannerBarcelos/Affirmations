@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const proxyPrefix = "/backend" // cannot use /api as vercel has a built-in api route and it will conflict with this one
+const proxyPrefix = "/backend"
 const userRoutes = "/users"
 const affirmationRoutes = "/affirmations"
 
