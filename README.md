@@ -15,6 +15,5 @@ VITE_BACKEND_URL=http://localhost:4000
 - In the backend directory, create a `.env` file and add the following properties
 ```bash
 MONGO_URI=<mongo_uri_connection_string>
-VERSION=v1
 JWT_SECRET=<some_key>
 ```
