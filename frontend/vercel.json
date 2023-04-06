@@ -3,7 +3,7 @@
     { "source": "/(.*)", "destination": "/" },
     {
       "source": "/api/:path*",
-      "destination": "https://affirmations-service-wyf9.onrender.com/api/:path*"
+      "destination": "https://affirmations-service-wyf9.onrender.com/server/:path*"
     }
   ]
 }
